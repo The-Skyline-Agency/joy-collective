@@ -74,10 +74,10 @@ export default function MockupB() {
   return (
     <div ref={root} className="bg-cream pb-24">
       {/* HERO */}
-      <header className="b-hero relative h-svh min-h-[620px] overflow-hidden bg-sage">
-        <video className="b-video absolute inset-0 h-full w-full object-cover [filter:saturate(0.5)]" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/45 via-forest/20 to-deep/50" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(47_60_41/0.32),transparent_65%)]" />
+      <header className="b-hero relative h-svh min-h-[620px] overflow-hidden bg-[#e9e6df]">
+        <video className="b-video absolute inset-0 h-full w-full object-cover [filter:saturate(0.9)]" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/45" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(0_0_0/0.25),transparent_65%)]" />
 
         <nav className="b-fade absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 py-5 text-white sm:px-10">
           <span className="font-heading text-lg font-semibold">the joy collective</span>
