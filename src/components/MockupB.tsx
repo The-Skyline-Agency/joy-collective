@@ -144,7 +144,7 @@ export default function MockupB() {
 
       {/* FOUNDER */}
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-28 sm:px-10 md:grid-cols-2 md:py-36">
-        <div data-reveal className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-t-full bg-mist">
+        <div data-reveal className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[28px] bg-mist">
           <Image src="/media/adriana-wall.jpg" alt="Adriana Cox in a white shirt against a soft grey wall" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-[36%_30%]" />
         </div>
         <div>
