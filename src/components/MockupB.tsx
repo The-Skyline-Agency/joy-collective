@@ -75,8 +75,8 @@ export default function MockupB() {
     <div ref={root} className="bg-cream pb-24">
       {/* HERO */}
       <header className="b-hero relative h-svh min-h-[620px] overflow-hidden bg-sage">
-        <video className="b-video absolute inset-0 h-full w-full object-cover" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/55 via-ink/35 to-ink/65" />
+        <video className="b-video absolute inset-0 h-full w-full object-cover [filter:saturate(0.35)]" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/65" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(28_34_26/0.4),transparent_65%)]" />
 
         <nav className="b-fade absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 py-5 text-white sm:px-10">

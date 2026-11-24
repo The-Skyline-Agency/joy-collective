@@ -80,9 +80,10 @@ export default function MockupA() {
       <header className="hero-card relative bg-forest mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
         {/* On phones the photo fills only the top of the card so the headline tab never covers the faces */}
         <div className="absolute inset-x-0 top-0 h-[62%] overflow-hidden sm:h-full">
-          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%]" />
+          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%] [filter:saturate(0.3)]" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-forest/90 via-forest/50 to-forest/30" />
+        {/* Sky is desaturated so the greens sit on neutral grey, not blue (green over blue reads as muddy teal) */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-ink/75 via-ink/25 to-ink/5" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/35 to-transparent" />
 
         <nav className="hero-fade relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
@@ -189,8 +190,8 @@ export default function MockupA() {
 
       {/* JOIN */}
       <section id="join" data-reveal className="relative overflow-hidden rounded-[32px] px-6 py-24 text-white sm:px-12 md:py-32">
-        <video className="absolute inset-0 h-full w-full object-cover" src="/media/clouds.mp4" poster="/media/clouds.jpg" autoPlay muted loop playsInline aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-r from-forest/90 to-forest/40" />
+        <video className="absolute inset-0 h-full w-full object-cover [filter:grayscale(1)_contrast(1.05)]" src="/media/clouds.mp4" poster="/media/clouds.jpg" autoPlay muted loop playsInline aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest/90 to-forest/55" />
         <div className="relative max-w-2xl">
           <h2 className="text-[clamp(2.4rem,5vw,4rem)] leading-[1.04]">Be the first to know when circles open</h2>
           <p className="mt-5 max-w-lg text-white/90">We&apos;re gathering our first small groups now. Leave your email and we&apos;ll be in touch.</p>
