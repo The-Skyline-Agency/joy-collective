@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Tokens lifted from the PeaceHub reference (DM Sans + Inter, blue/pink palette) */
+@theme {
+  --color-ink: #222222;
+  --color-ink-75: #222222bf;
+  --color-ink-50: #33333380;
+  --color-blue: #3973e1;
+  --color-blue-light: #bfd6ec;
+  --color-pink: #eac0de;
+  --color-pink-25: #eac0de40;
+  --color-mist: #f4f4f4;
+  --font-heading: var(--font-dm-sans), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-ink);
+  background: #fff;
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.glass {
+  background: rgb(255 255 255 / 0.18);
+  border: 1px solid rgb(255 255 255 / 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* PeaceHub signature: a white tab notched into the hero card, with inverted corners */
+.notch {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-top-right-radius: 32px;
+}
+.notch::before,
+.notch::after {
+  content: "";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle at 100% 0, transparent 31.5px, #fff 32px);
+}
+.notch::before { left: 0; top: -32px; }
+.notch::after { right: -32px; bottom: 0; }
+
+.marquee-track { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float { animation: none !important; }
 }
