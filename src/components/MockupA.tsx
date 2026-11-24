@@ -174,8 +174,9 @@ export default function MockupA() {
 
       {/* FOUNDER */}
       <section id="founder" className="grid items-center gap-10 py-24 md:grid-cols-[0.8fr_1.2fr] md:gap-20 md:py-32">
-        <div data-reveal className="relative aspect-square overflow-hidden rounded-[28px] bg-mist">
-          <Image data-parallax src="/media/adriana.jpg" alt="Portrait of Adriana Cox" fill sizes="(min-width: 768px) 40vw, 100vw" className="scale-110 object-cover" />
+        <div data-reveal className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-mist">
+          <Image data-parallax src="/media/adriana-standing.jpg" alt="Adriana Cox in a white blouse, leaning on a whitewashed wall" fill sizes="(min-width: 768px) 40vw, 100vw" className="scale-110 object-cover object-[50%_20%]" />
+          <span className="absolute bottom-5 left-5 rounded-full bg-cream/90 px-4 py-1.5 text-xs text-deep backdrop-blur">Adriana Cox, founder</span>
         </div>
         <div>
           <span data-reveal className="w-fit rounded-full bg-mint px-4 py-1.5 text-xs text-deep"># Meet the founder</span>
