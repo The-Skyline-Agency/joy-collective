@@ -1,5 +1,5 @@
-import MockupA from "@/components/MockupA";
+import MockupC from "@/components/MockupC";
 
 export default function Page() {
-  return <MockupA />;
+  return <MockupC />;
 }
