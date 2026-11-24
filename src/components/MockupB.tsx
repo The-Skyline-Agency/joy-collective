@@ -13,10 +13,10 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 const words = ["Seen", "Heard", "Held", "Joy"];
 const strip = [
-  { src: "/media/friends-2.jpg", alt: "Two friends laughing outdoors", label: "A laugh with a friend" },
+  { src: "/media/friends-sky.jpg", alt: "Two friends wrapped in a blanket, laughing under a blue sky", label: "A laugh with a friend" },
   { src: "/media/balance.jpg", alt: "A woman with hands pressed together by the sea", label: "A quiet minute" },
-  { src: "/media/friends-1.jpg", alt: "Two friends lying back on a truck, talking", label: "Talking it through" },
-  { src: "/media/friends-3.jpg", alt: "Two women embracing", label: "Someone who gets it" },
+  { src: "/media/friends-park.jpg", alt: "Two women talking in a sunlit park", label: "Talking it through" },
+  { src: "/media/friends-cuddle.jpg", alt: "Two friends cuddling and smiling in the sun", label: "Someone who gets it" },
 ];
 
 export default function MockupB() {
@@ -28,10 +28,12 @@ export default function MockupB() {
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const title = SplitText.create(".b-title", { type: "words,chars", mask: "chars" });
+        // Masks clip descenders (j, y, comma): pad them during the reveal, then drop the split entirely.
+        gsap.set(title.masks, { paddingBottom: "0.2em", marginBottom: "-0.2em" });
         gsap
           .timeline({ defaults: { ease: "power4.out" } })
           .from(".b-video", { scale: 1.15, duration: 2.4, ease: "power2.out" })
-          .from(title.chars, { yPercent: 120, duration: 1.1, stagger: 0.025 }, 0.3)
+          .from(title.chars, { yPercent: 130, duration: 1.1, stagger: 0.025, onComplete: () => title.revert() }, 0.3)
           .from(".b-fade", { autoAlpha: 0, y: 20, duration: 0.9, stagger: 0.1 }, 0.9);
 
         // Hero text drifts up and fades as you leave the fold.
@@ -74,6 +76,7 @@ export default function MockupB() {
       <header className="b-hero relative h-svh min-h-[620px] overflow-hidden bg-blue-light">
         <video className="b-video absolute inset-0 h-full w-full object-cover" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-b from-blue/55 via-ink/35 to-ink/65" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(20_24_40/0.4),transparent_65%)]" />
 
         <nav className="b-fade absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 py-5 text-white sm:px-10">
           <span className="font-heading text-lg font-semibold">the joy collective</span>
@@ -113,7 +116,7 @@ export default function MockupB() {
         <div className="mt-20 grid gap-10 border-t border-ink/10 pt-10 md:grid-cols-3">
           {pillars.map((p, i) => (
             <div key={p.title} data-reveal>
-              <span className="font-heading text-5xl text-pink">0{i + 1}</span>
+              <span className="font-heading text-5xl text-[#b9709f]">0{i + 1}</span>
               <h3 className="mt-3 text-xl font-semibold">{p.title}</h3>
               <p className="mt-2 leading-relaxed text-ink-75">{p.body}</p>
             </div>
@@ -132,7 +135,7 @@ export default function MockupB() {
           {strip.map((s, i) => (
             <figure key={s.src} className={`relative shrink-0 overflow-hidden rounded-[28px] md:h-[70vh] ${i % 2 ? "md:mt-16 md:w-[30vw]" : "md:w-[40vw]"} aspect-[4/5] md:aspect-auto`}>
               <Image src={s.src} alt={s.alt} fill sizes="(min-width: 900px) 40vw, 100vw" className="object-cover" />
-              <figcaption className="glass absolute bottom-5 left-5 rounded-full px-4 py-1.5 text-sm text-white">{s.label}</figcaption>
+              <figcaption className="glass-dark absolute bottom-5 left-5 rounded-full px-4 py-1.5 text-sm text-white">{s.label}</figcaption>
             </figure>
           ))}
         </div>

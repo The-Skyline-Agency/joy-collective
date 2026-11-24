@@ -56,3 +56,11 @@ h1, h2, h3, .font-heading {
 @media (prefers-reduced-motion: reduce) {
   .float { animation: none !important; }
 }
+
+/* Darker glass for labels sitting on photos: keeps white text readable on bright areas */
+.glass-dark {
+  background: rgb(20 24 40 / 0.42);
+  border: 1px solid rgb(255 255 255 / 0.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
