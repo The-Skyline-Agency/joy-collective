@@ -43,7 +43,11 @@ export default function MockupA() {
           type: "lines",
           mask: "lines",
           autoSplit: true,
-          onSplit: (self) => gsap.from(self.lines, { yPercent: 110, duration: 1, stagger: 0.12, delay: 0.5, ease: "power3.out" }),
+          onSplit: (self) => {
+            // Masks clip descenders (j, y, comma): pad them during the reveal, then drop the split entirely.
+            gsap.set(self.masks, { paddingBottom: "0.18em", marginBottom: "-0.18em" });
+            return gsap.from(self.lines, { yPercent: 120, duration: 1, stagger: 0.12, delay: 0.5, ease: "power3.out", onComplete: () => self.revert() });
+          },
         });
 
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
@@ -75,8 +79,9 @@ export default function MockupA() {
     <div ref={root} className="pb-28">
       {/* HERO: edge to edge, content grouped in two anchored blocks */}
       <header className="hero-card relative mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
-        <Image src="/media/friends-2.jpg" alt="Two friends laughing together outdoors" fill priority sizes="100vw" className="hero-img object-cover object-[60%_30%]" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue/90 via-blue/40 to-blue/10" />
+        <Image src="/media/friends-sky.jpg" alt="Two friends wrapped in a blanket, laughing under a blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[55%_35%]" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue/90 via-blue/50 to-blue/30" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/35 to-transparent" />
 
         <nav className="hero-fade relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
           <Logo light />
@@ -89,7 +94,7 @@ export default function MockupA() {
         </nav>
 
         {/* Right: one info card, anchored to the bottom corner */}
-        <aside className="hero-fade glass absolute bottom-10 right-10 z-10 hidden w-[340px] rounded-3xl p-4 text-white lg:block">
+        <aside className="hero-fade glass-dark absolute bottom-10 right-10 z-10 hidden w-[340px] rounded-3xl p-4 text-white lg:block">
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-white">
             <Image src="/media/circle.webp" alt="A small group sitting in a circle, talking" fill sizes="340px" className="object-cover" />
           </div>
@@ -121,8 +126,8 @@ export default function MockupA() {
       {/* MISSION */}
       <section id="mission" className="grid gap-10 py-24 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:py-32">
         <div data-reveal className="relative aspect-[4/5] overflow-hidden rounded-[28px]">
-          <Image data-parallax src="/media/friends-3.jpg" alt="Two women embracing and smiling" fill sizes="(min-width: 768px) 45vw, 100vw" className="scale-110 object-cover" />
-          <span className="glass absolute left-5 top-5 rounded-full px-4 py-1.5 text-xs text-white">You are not the only one</span>
+          <Image data-parallax src="/media/friends-cuddle.jpg" alt="Two friends cuddling and smiling in the sun" fill sizes="(min-width: 768px) 45vw, 100vw" className="scale-110 object-cover" />
+          <span className="glass-dark absolute left-5 top-5 rounded-full px-4 py-1.5 text-xs text-white">You are not the only one</span>
         </div>
         <div className="flex flex-col justify-center">
           <span data-reveal className="w-fit rounded-full bg-ink px-4 py-1.5 text-xs text-white"># Our mission</span>
@@ -182,7 +187,7 @@ export default function MockupA() {
 
       {/* JOIN */}
       <section id="join" data-reveal className="relative overflow-hidden rounded-[32px] px-6 py-24 text-white sm:px-12 md:py-32">
-        <Image src="/media/sky.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        <video className="absolute inset-0 h-full w-full object-cover" src="/media/clouds.mp4" poster="/media/clouds.jpg" autoPlay muted loop playsInline aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-r from-blue/90 to-blue/40" />
         <div className="relative max-w-2xl">
           <h2 className="text-[clamp(2.4rem,5vw,4rem)] leading-[1.04]">Be the first to know when circles open</h2>
