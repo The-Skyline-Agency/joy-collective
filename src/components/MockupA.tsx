@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import EmailForm from "./EmailForm";
-import Switcher from "./Switcher";
 import { bio, disclaimer, INSTAGRAM, mission, pillars, quote, story, SUBSTACK } from "./content";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
@@ -208,8 +207,6 @@ export default function MockupA() {
       </footer>
 
       </div>
-
-      <Switcher current="a" />
     </div>
   );
 }

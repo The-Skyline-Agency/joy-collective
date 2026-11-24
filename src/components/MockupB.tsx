@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import EmailForm from "./EmailForm";
-import Switcher from "./Switcher";
 import { bio, disclaimer, INSTAGRAM, mission, pillars, quote, story, SUBSTACK } from "./content";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
@@ -171,8 +170,6 @@ export default function MockupB() {
         <p className="max-w-md leading-relaxed">{disclaimer}</p>
         <p>joycollective.org</p>
       </footer>
-
-      <Switcher current="b" />
     </div>
   );
 }
