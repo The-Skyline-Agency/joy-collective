@@ -12,15 +12,15 @@ const tones = {
   dark: {
     wrap: "bg-white ring-1 ring-ink/15",
     input: "text-ink placeholder:text-ink-50",
-    button: "bg-ink text-white hover:bg-forest",
+    button: "bg-forest text-white hover:bg-deep",
     note: "text-ink-75",
   },
-  // Mockup C: warm stone field with a near-black button, after the Soma reference.
+  // Mockup C: soft sage field with a green button (pill shape after the Soma reference).
   stone: {
-    wrap: "bg-[#e8e4da] shadow-[0_10px_30px_-12px_rgba(30,29,25,0.35)]",
-    input: "text-[#1e1d19] placeholder:text-[#1e1d19]/55",
-    button: "bg-[#1e1d19] text-[#f6f3ec] hover:bg-[#3a372f]",
-    note: "text-[#1e1d19]/70",
+    wrap: "bg-[#e4e9d6] ring-1 ring-[#2f382b]/[0.06] shadow-[0_8px_24px_-18px_rgba(47,56,43,0.22)]",
+    input: "text-[#2f382b] placeholder:text-[#2f382b]/55",
+    button: "bg-[#5e7652] text-[#f6f3ea] hover:bg-[#3f4f37]",
+    note: "text-[#2f382b]/70",
   },
 };
 
