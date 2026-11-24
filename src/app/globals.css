@@ -64,3 +64,10 @@ h1, h2, h3, .font-heading {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
+
+/* Mockup C: editorial serif + tight grotesk, scoped so A and B keep DM Sans / Inter */
+.c-root { font-family: var(--font-c-sans), sans-serif; }
+.c-root h1, .c-root h2, .c-root h3 { font-family: inherit; letter-spacing: inherit; }
+.c-root .c-serif { font-family: var(--font-c-serif), serif; letter-spacing: -0.01em; }
+.c-root .c-sans { font-family: var(--font-c-sans), sans-serif; }
+.c-sticky-on { visibility: visible !important; }
