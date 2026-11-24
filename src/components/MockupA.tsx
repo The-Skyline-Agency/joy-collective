@@ -77,12 +77,12 @@ export default function MockupA() {
   return (
     <div ref={root} className="pb-28">
       {/* HERO: edge to edge, content grouped in two anchored blocks */}
-      <header className="hero-card relative bg-blue mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
+      <header className="hero-card relative bg-forest mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
         {/* On phones the photo fills only the top of the card so the headline tab never covers the faces */}
         <div className="absolute inset-x-0 top-0 h-[62%] overflow-hidden sm:h-full">
           <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%]" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue/90 via-blue/50 to-blue/30" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-forest/90 via-forest/50 to-forest/30" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/35 to-transparent" />
 
         <nav className="hero-fade relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
@@ -101,7 +101,7 @@ export default function MockupA() {
             <Image src="/media/circle.webp" alt="A small group sitting in a circle, talking" fill sizes="340px" className="object-cover" />
           </div>
           <div className="px-1 pt-4">
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-blue">Launching November 30</span>
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-forest">Launching November 30</span>
             <p className="mt-3 text-[15px] font-medium">Small circles. Real conversations.</p>
             <ul className="mt-3 divide-y divide-white/30 text-sm text-white/90">
               <li className="flex justify-between py-2">Seen <span aria-hidden>→</span></li>
@@ -137,7 +137,7 @@ export default function MockupA() {
           <p data-reveal className="mt-6 max-w-xl text-ink-75 leading-relaxed">{mission}</p>
           <div className="pillars mt-10 grid gap-4 sm:grid-cols-3">
             {pillars.map((p, i) => (
-              <div key={p.title} className={`pillar rounded-2xl p-5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)] ${i === 0 ? "bg-blue text-white" : "bg-white"}`}>
+              <div key={p.title} className={`pillar rounded-2xl p-5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)] ${i === 0 ? "bg-forest text-white" : "bg-white"}`}>
                 <span className={`flex h-8 w-8 items-center justify-center rounded-full text-xs ${i === 0 ? "bg-white/20" : "bg-mist"}`}>0{i + 1}</span>
                 <h3 className="mt-6 text-[15px] font-semibold">{p.title}</h3>
                 <p className={`mt-2 text-xs leading-relaxed ${i === 0 ? "text-white/85" : "text-ink-75"}`}>{p.body}</p>
@@ -148,9 +148,9 @@ export default function MockupA() {
       </section>
 
       {/* STORY */}
-      <section id="story" className="story relative overflow-hidden rounded-[32px] bg-pink-25 px-6 py-20 sm:px-12 md:py-28">
+      <section id="story" className="story relative overflow-hidden rounded-[32px] bg-cream px-6 py-20 sm:px-12 md:py-28">
         <svg className="swirl pointer-events-none absolute -left-10 top-6 w-[110%] md:w-[70%]" viewBox="0 0 800 300" fill="none" aria-hidden>
-          <path d="M-20 220 C 120 120, 260 60, 360 110 S 420 260, 330 250 S 300 120, 460 90 S 700 120, 840 40" stroke="white" strokeWidth="36" strokeLinecap="round" />
+          <path d="M-20 220 C 120 120, 260 60, 360 110 S 420 260, 330 250 S 300 120, 460 90 S 700 120, 840 40" stroke="var(--color-sage)" strokeWidth="36" strokeLinecap="round" />
         </svg>
         <div className="relative grid items-center gap-12 md:grid-cols-2">
           <div>
@@ -181,7 +181,7 @@ export default function MockupA() {
           <blockquote data-reveal className="mt-6 font-heading text-[clamp(1.8rem,3.4vw,2.8rem)] leading-[1.15]">&ldquo;{quote}&rdquo;</blockquote>
           <p data-reveal className="mt-6 max-w-xl leading-relaxed text-ink-75">{bio}</p>
           <div data-reveal className="mt-8 flex flex-wrap gap-3">
-            <a href={SUBSTACK} target="_blank" rel="noreferrer" className="rounded-full bg-ink px-6 py-3 text-sm text-white transition-colors hover:bg-blue">Read her Substack <span aria-hidden>⟶</span></a>
+            <a href={SUBSTACK} target="_blank" rel="noreferrer" className="rounded-full bg-ink px-6 py-3 text-sm text-white transition-colors hover:bg-forest">Read her Substack <span aria-hidden>⟶</span></a>
             <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="rounded-full border border-ink/20 px-6 py-3 text-sm transition-colors hover:border-ink">Instagram</a>
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function MockupA() {
       {/* JOIN */}
       <section id="join" data-reveal className="relative overflow-hidden rounded-[32px] px-6 py-24 text-white sm:px-12 md:py-32">
         <video className="absolute inset-0 h-full w-full object-cover" src="/media/clouds.mp4" poster="/media/clouds.jpg" autoPlay muted loop playsInline aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue/90 to-blue/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest/90 to-forest/40" />
         <div className="relative max-w-2xl">
           <h2 className="text-[clamp(2.4rem,5vw,4rem)] leading-[1.04]">Be the first to know when circles open</h2>
           <p className="mt-5 max-w-lg text-white/90">We&apos;re gathering our first small groups now. Leave your email and we&apos;ll be in touch.</p>

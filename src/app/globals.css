@@ -1,15 +1,14 @@
 @import "tailwindcss";
 
-/* Tokens lifted from the PeaceHub reference (DM Sans + Inter, blue/pink palette) */
+/* Fonts from the PeaceHub reference (DM Sans + Inter); colors from the Joy Collective invite (forest, sage, cream) */
 @theme {
-  --color-ink: #222222;
-  --color-ink-75: #222222bf;
-  --color-ink-50: #33333380;
-  --color-blue: #3973e1;
-  --color-blue-light: #bfd6ec;
-  --color-pink: #eac0de;
-  --color-pink-25: #eac0de40;
-  --color-mist: #f4f4f4;
+  --color-ink: #23271f;
+  --color-ink-75: #23271fbf;
+  --color-ink-50: #23271f80;
+  --color-forest: #4f6249;
+  --color-sage: #d1d3be;
+  --color-cream: #f2f0e6;
+  --color-mist: #eeede4;
   --font-heading: var(--font-dm-sans), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
 }
@@ -59,7 +58,7 @@ h1, h2, h3, .font-heading {
 
 /* Darker glass for labels sitting on photos: keeps white text readable on bright areas */
 .glass-dark {
-  background: rgb(20 24 40 / 0.42);
+  background: rgb(28 34 26 / 0.45);
   border: 1px solid rgb(255 255 255 / 0.28);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);

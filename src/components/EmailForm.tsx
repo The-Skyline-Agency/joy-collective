@@ -12,7 +12,7 @@ const tones = {
   dark: {
     wrap: "bg-white ring-1 ring-ink/15",
     input: "text-ink placeholder:text-ink-50",
-    button: "bg-ink text-white hover:bg-blue",
+    button: "bg-ink text-white hover:bg-forest",
     note: "text-ink-75",
   },
   // Mockup C: warm stone field with a near-black button, after the Soma reference.
