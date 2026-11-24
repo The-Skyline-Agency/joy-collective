@@ -223,8 +223,13 @@ export default function MockupC() {
 
       {/* FOUNDER */}
       <section id="c-founder" className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-10 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
-        <div data-reveal className="c-portrait relative aspect-[2/3] overflow-hidden rounded-[4px]">
-          <Image src="/media/adriana-portrait.jpg" alt="Adriana Cox smiling, seated on a wooden bench" fill sizes="(min-width: 768px) 45vw, 100vw" className="scale-110 object-cover object-top" />
+        <div data-reveal className="relative mb-12 mr-6 md:mb-0">
+          <div className="c-portrait relative aspect-[2/3] overflow-hidden rounded-[4px]">
+            <Image src="/media/adriana-bench.jpg" alt="Adriana Cox smiling, seated on a wooden bench" fill sizes="(min-width: 768px) 45vw, 100vw" className="scale-110 object-cover object-top" />
+          </div>
+          <div className="absolute -bottom-12 -right-6 aspect-[3/4] w-[38%] overflow-hidden rounded-[4px] ring-[6px] ring-[#f6f3ea]">
+            <Image src="/media/adriana-studio.jpg" alt="Adriana Cox in a black pleated top and wide trousers, studio portrait" fill sizes="20vw" className="object-cover object-[50%_10%]" />
+          </div>
         </div>
         <div>
           <Label n="04">Founder</Label>
