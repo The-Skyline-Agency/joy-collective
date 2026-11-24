@@ -77,14 +77,14 @@ export default function MockupA() {
   return (
     <div ref={root} className="pb-28">
       {/* HERO: edge to edge, content grouped in two anchored blocks */}
-      <header className="hero-card relative bg-forest mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
+      <header className="hero-card relative bg-[#e9e6df] mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
         {/* On phones the photo fills only the top of the card so the headline tab never covers the faces */}
         <div className="absolute inset-x-0 top-0 h-[62%] overflow-hidden sm:h-full">
-          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%] [filter:saturate(0.5)]" />
+          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%] [filter:saturate(0.9)]" />
         </div>
-        {/* Sky is partly desaturated and washed with soft green, so it reads calm instead of blue against the greens */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-forest/40 via-leaf/20 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-deep/20 to-transparent" />
+        {/* Neutral shade only, for nav and text contrast: no colour wash over the sky */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/25 via-black/5 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/25 to-transparent" />
 
         <nav className="hero-fade relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
           <Logo light />
