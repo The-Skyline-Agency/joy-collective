@@ -80,11 +80,11 @@ export default function MockupA() {
       <header className="hero-card relative bg-forest mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
         {/* On phones the photo fills only the top of the card so the headline tab never covers the faces */}
         <div className="absolute inset-x-0 top-0 h-[62%] overflow-hidden sm:h-full">
-          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%] [filter:saturate(0.3)]" />
+          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%] [filter:saturate(0.5)]" />
         </div>
-        {/* Sky is desaturated so the greens sit on neutral grey, not blue (green over blue reads as muddy teal) */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-ink/75 via-ink/25 to-ink/5" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/35 to-transparent" />
+        {/* Sky is partly desaturated and washed with soft green, so it reads calm instead of blue against the greens */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-forest/40 via-leaf/20 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-deep/20 to-transparent" />
 
         <nav className="hero-fade relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
           <Logo light />
@@ -97,14 +97,14 @@ export default function MockupA() {
         </nav>
 
         {/* Right: one info card, anchored to the bottom corner */}
-        <aside className="hero-fade glass-dark absolute bottom-10 right-10 z-10 hidden w-[340px] rounded-3xl p-4 text-white lg:block">
+        <aside className="hero-fade absolute bottom-10 right-10 z-10 hidden w-[340px] rounded-3xl bg-cream/85 p-4 text-ink ring-1 ring-white/60 backdrop-blur-md lg:block">
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-white">
             <Image src="/media/circle.webp" alt="A small group sitting in a circle, talking" fill sizes="340px" className="object-cover" />
           </div>
           <div className="px-1 pt-4">
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-forest">Launching November 30</span>
+            <span className="rounded-full bg-mint px-3 py-1 text-xs font-medium text-deep">Launching November 30</span>
             <p className="mt-3 text-[15px] font-medium">Small circles. Real conversations.</p>
-            <ul className="mt-3 divide-y divide-white/30 text-sm text-white/90">
+            <ul className="mt-3 divide-y divide-ink/10 text-sm text-ink-75">
               <li className="flex justify-between py-2">Seen <span aria-hidden>→</span></li>
               <li className="flex justify-between py-2">Heard <span aria-hidden>→</span></li>
               <li className="flex justify-between py-2">Little moments of joy <span aria-hidden>→</span></li>
@@ -133,7 +133,7 @@ export default function MockupA() {
           <span className="glass-dark absolute left-5 top-5 rounded-full px-4 py-1.5 text-xs text-white">You are not the only one</span>
         </div>
         <div className="flex flex-col justify-center">
-          <span data-reveal className="w-fit rounded-full bg-ink px-4 py-1.5 text-xs text-white"># Our mission</span>
+          <span data-reveal className="w-fit rounded-full bg-mint px-4 py-1.5 text-xs text-deep"># Our mission</span>
           <h2 data-reveal className="mt-6 text-[clamp(2.2rem,4.4vw,3.5rem)] leading-[1.08]">You deserve to be seen and heard</h2>
           <p data-reveal className="mt-6 max-w-xl text-ink-75 leading-relaxed">{mission}</p>
           <div className="pillars mt-10 grid gap-4 sm:grid-cols-3">
@@ -149,13 +149,13 @@ export default function MockupA() {
       </section>
 
       {/* STORY */}
-      <section id="story" className="story relative overflow-hidden rounded-[32px] bg-cream px-6 py-20 sm:px-12 md:py-28">
+      <section id="story" className="story relative overflow-hidden rounded-[32px] bg-mint px-6 py-20 sm:px-12 md:py-28">
         <svg className="swirl pointer-events-none absolute -left-10 top-6 w-[110%] md:w-[70%]" viewBox="0 0 800 300" fill="none" aria-hidden>
           <path d="M-20 220 C 120 120, 260 60, 360 110 S 420 260, 330 250 S 300 120, 460 90 S 700 120, 840 40" stroke="var(--color-sage)" strokeWidth="36" strokeLinecap="round" />
         </svg>
         <div className="relative grid items-center gap-12 md:grid-cols-2">
           <div>
-            <span data-reveal className="w-fit rounded-full bg-ink px-4 py-1.5 text-xs text-white"># Where the joy comes from</span>
+            <span data-reveal className="w-fit rounded-full bg-white px-4 py-1.5 text-xs text-deep"># Where the joy comes from</span>
             <h2 data-reveal className="mt-6 text-[clamp(2.2rem,4.4vw,3.5rem)] leading-[1.08]">Small things that add up to a way out</h2>
             <p data-reveal className="mt-6 max-w-lg leading-relaxed text-ink-75">{story}</p>
           </div>
@@ -178,24 +178,24 @@ export default function MockupA() {
           <Image data-parallax src="/media/adriana.jpg" alt="Portrait of Adriana Cox" fill sizes="(min-width: 768px) 40vw, 100vw" className="scale-110 object-cover" />
         </div>
         <div>
-          <span data-reveal className="w-fit rounded-full bg-ink px-4 py-1.5 text-xs text-white"># Meet the founder</span>
+          <span data-reveal className="w-fit rounded-full bg-mint px-4 py-1.5 text-xs text-deep"># Meet the founder</span>
           <blockquote data-reveal className="mt-6 font-heading text-[clamp(1.8rem,3.4vw,2.8rem)] leading-[1.15]">&ldquo;{quote}&rdquo;</blockquote>
           <p data-reveal className="mt-6 max-w-xl leading-relaxed text-ink-75">{bio}</p>
           <div data-reveal className="mt-8 flex flex-wrap gap-3">
-            <a href={SUBSTACK} target="_blank" rel="noreferrer" className="rounded-full bg-ink px-6 py-3 text-sm text-white transition-colors hover:bg-forest">Read her Substack <span aria-hidden>⟶</span></a>
+            <a href={SUBSTACK} target="_blank" rel="noreferrer" className="rounded-full bg-forest px-6 py-3 text-sm text-white transition-colors hover:bg-deep">Read her Substack <span aria-hidden>⟶</span></a>
             <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="rounded-full border border-ink/20 px-6 py-3 text-sm transition-colors hover:border-ink">Instagram</a>
           </div>
         </div>
       </section>
 
       {/* JOIN */}
-      <section id="join" data-reveal className="relative overflow-hidden rounded-[32px] px-6 py-24 text-white sm:px-12 md:py-32">
+      <section id="join" data-reveal className="relative overflow-hidden rounded-[32px] px-6 py-24 text-ink sm:px-12 md:py-32">
         <video className="absolute inset-0 h-full w-full object-cover [filter:grayscale(1)_contrast(1.05)]" src="/media/clouds.mp4" poster="/media/clouds.jpg" autoPlay muted loop playsInline aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-r from-forest/90 to-forest/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-mint/95 via-sage/75 to-leaf/40" />
         <div className="relative max-w-2xl">
           <h2 className="text-[clamp(2.4rem,5vw,4rem)] leading-[1.04]">Be the first to know when circles open</h2>
-          <p className="mt-5 max-w-lg text-white/90">We&apos;re gathering our first small groups now. Leave your email and we&apos;ll be in touch.</p>
-          <div className="mt-8"><EmailForm /></div>
+          <p className="mt-5 max-w-lg text-ink-75">We&apos;re gathering our first small groups now. Leave your email and we&apos;ll be in touch.</p>
+          <div className="mt-8"><EmailForm tone="dark" /></div>
         </div>
       </section>
 

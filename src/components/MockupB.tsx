@@ -75,9 +75,9 @@ export default function MockupB() {
     <div ref={root} className="bg-cream pb-24">
       {/* HERO */}
       <header className="b-hero relative h-svh min-h-[620px] overflow-hidden bg-sage">
-        <video className="b-video absolute inset-0 h-full w-full object-cover [filter:saturate(0.35)]" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/65" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(28_34_26/0.4),transparent_65%)]" />
+        <video className="b-video absolute inset-0 h-full w-full object-cover [filter:saturate(0.5)]" src="/media/balance.mp4" poster="/media/balance.jpg" autoPlay muted loop playsInline aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest/45 via-forest/20 to-deep/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(47_60_41/0.32),transparent_65%)]" />
 
         <nav className="b-fade absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 py-5 text-white sm:px-10">
           <span className="font-heading text-lg font-semibold">the joy collective</span>
@@ -160,9 +160,9 @@ export default function MockupB() {
       </section>
 
       {/* JOIN */}
-      <section id="join-b" className="mx-3 overflow-hidden rounded-[32px] bg-ink px-6 py-24 text-center text-white sm:mx-5 md:py-32">
+      <section id="join-b" className="mx-3 overflow-hidden rounded-[32px] bg-mint px-6 py-24 text-center text-ink sm:mx-5 md:py-32">
         <h2 data-reveal className="mx-auto max-w-3xl text-[clamp(2.4rem,5.5vw,4.6rem)] leading-[1.02]">Save a seat in the first circle</h2>
-        <p data-reveal className="mx-auto mt-5 max-w-md text-white/75">We&apos;re opening our first small groups soon. Leave your email and we&apos;ll let you know.</p>
+        <p data-reveal className="mx-auto mt-5 max-w-md text-ink-75">We&apos;re opening our first small groups soon. Leave your email and we&apos;ll let you know.</p>
         <div data-reveal className="mt-10 flex justify-center"><EmailForm tone="dark" /></div>
       </section>
 
