@@ -28,13 +28,14 @@ export default function MockupB() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const title = SplitText.create(".b-title", { type: "words,chars", mask: "chars" });
+        // Split by word, not letter: per-letter spans drop kerning, which made the spacing jump when the split was removed.
+        const title = SplitText.create(".b-title", { type: "words", mask: "words" });
         // Masks clip descenders (j, y, comma): pad them during the reveal, then drop the split entirely.
         gsap.set(title.masks, { paddingBottom: "0.2em", marginBottom: "-0.2em" });
         gsap
           .timeline({ defaults: { ease: "power4.out" } })
           .from(".b-video", { scale: 1.15, duration: 2.4, ease: "power2.out" })
-          .from(title.chars, { yPercent: 130, duration: 1.1, stagger: 0.025, onComplete: () => title.revert() }, 0.3)
+          .from(title.words, { yPercent: 130, duration: 1.2, stagger: 0.09, onComplete: () => title.revert() }, 0.3)
           .from(".b-fade", { autoAlpha: 0, y: 20, duration: 0.9, stagger: 0.1 }, 0.9);
 
         // Hero text drifts up and fades as you leave the fold.

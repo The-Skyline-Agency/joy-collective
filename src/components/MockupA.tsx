@@ -78,8 +78,11 @@ export default function MockupA() {
   return (
     <div ref={root} className="pb-28">
       {/* HERO: edge to edge, content grouped in two anchored blocks */}
-      <header className="hero-card relative mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
-        <Image src="/media/friends-sky.jpg" alt="Two friends wrapped in a blanket, laughing under a blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[55%_35%]" />
+      <header className="hero-card relative bg-blue mx-2 mt-2 h-[calc(100svh-16px)] min-h-[720px] overflow-hidden rounded-[32px] sm:mx-3 sm:mt-3 sm:h-[calc(100svh-24px)]">
+        {/* On phones the photo fills only the top of the card so the headline tab never covers the faces */}
+        <div className="absolute inset-x-0 top-0 h-[62%] overflow-hidden sm:h-full">
+          <Image src="/media/hero-friends.jpg" alt="Two friends wrapped in a shared blanket under a deep blue sky" fill priority sizes="100vw" className="hero-img object-cover object-[50%_88%] max-sm:object-[50%_75%]" />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-blue/90 via-blue/50 to-blue/30" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/35 to-transparent" />
 

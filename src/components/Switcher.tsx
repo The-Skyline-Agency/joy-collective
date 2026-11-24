@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 // Review aid for the client: flip between the two mockups. Remove before launch.
-export default function Switcher({ current }: { current: "a" | "b" }) {
-  const item = (key: "a" | "b", href: string, label: string) => (
+export default function Switcher({ current }: { current: "a" | "b" | "c" }) {
+  const item = (key: "a" | "b" | "c", href: string, label: string) => (
     <Link
       href={href}
       aria-current={current === key ? "page" : undefined}
@@ -20,6 +20,7 @@ export default function Switcher({ current }: { current: "a" | "b" }) {
     >
       {item("a", "/", "Mockup A")}
       {item("b", "/b", "Mockup B")}
+      {item("c", "/c", "Mockup C")}
     </nav>
   );
 }

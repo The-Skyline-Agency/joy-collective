@@ -2,7 +2,7 @@
 // so everything here is a starting point for Adriana to edit.
 
 export const SUBSTACK = "https://atcwithadriana.substack.com";
-export const INSTAGRAM = "https://www.instagram.com/p/DfuyHQWNEi-/"; // her handle is unknown; this is the post from the brief
+export const INSTAGRAM = "https://www.instagram.com/withadrianacox/";
 
 export const mission =
   "The Joy Collective brings women together in small groups for real conversations about the hard stuff. Nobody performs and nobody fixes. It's a circle where you can open up, and leave feeling seen and heard.";
