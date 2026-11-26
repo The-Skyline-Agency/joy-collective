@@ -22,6 +22,13 @@ const tones = {
     button: "bg-[#5e7652] text-[#f6f3ea] hover:bg-[#3f4f37]",
     note: "text-[#2f382b]/70",
   },
+  // Mockup D: cream field, forest green button that deepens on hover.
+  gt: {
+    wrap: "bg-[#f0ece0] ring-1 ring-[#0c0500]/10",
+    input: "text-[#1e1d1b] placeholder:text-[#5a5753]",
+    button: "bg-[#5e7652] text-white hover:bg-[#3f4f37]",
+    note: "text-[#5a5753]",
+  },
 };
 
 // Mockup only: no backend yet. Swap the submit handler for the real list provider before launch.

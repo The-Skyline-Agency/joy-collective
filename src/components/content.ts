@@ -25,3 +25,21 @@ export const quote =
 
 export const disclaimer =
   "The Joy Collective is a peer community, not a substitute for professional care. In the US, if you are in crisis, call or text 988.";
+
+// Excerpts from Adriana's founder letter, trimmed for the page. Wording is hers; cuts are ours.
+export const letter = {
+  greeting: "Welcome to The Joy Collective. I’m so glad you’re here.",
+  paragraphs: [
+    "A few years ago, I found myself in a place I never imagined I would be. I was struggling with depression, anxiety and a sense of disconnection from myself. It taught me something I believe in more than ever: we are not meant to do life alone.",
+    "I found strength in the people who showed up for me, and in the conversations that made me feel less alone. Those experiences changed the way I see the world and inspired me to create The Joy Collective.",
+  ],
+  values: [
+    { lead: "Curiosity", rest: "instead of judgment" },
+    { lead: "Vulnerability", rest: "instead of perfection" },
+    { lead: "Compassion", rest: "instead of comparison" },
+  ],
+  closing: "Let’s make room for connection. Let’s make room for joy. And let’s do it together.",
+  signoff: "With love,",
+  name: "Adriana Cox",
+  role: "Founder, The Joy Collective",
+};
