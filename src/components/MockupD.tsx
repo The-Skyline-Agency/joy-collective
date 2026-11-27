@@ -78,12 +78,12 @@ const leafAt = (x: number, y: number, rot: number, gap = LEAF_GAP) => {
   const r = (rot * Math.PI) / 180;
   return `translate(${(x + Math.sin(r) * gap).toFixed(2)} ${(y - Math.cos(r) * gap).toFixed(2)}) rotate(${rot})`;
 };
-// Final logo artwork, hand-tuned from the tree concept (the Y of "joy" grows into a sapling).
+// Logo artwork from Fernanda: the wordmark in the nav, the icon on its own above the sign-up.
 function Wordmark({ horizontal = false }: { horizontal?: boolean }) {
   return horizontal ? (
-    <Image className="logo is--horizontal" src="/media/d/logo-horizontal.svg" alt="The Joy Collective" width={4937} height={1372} priority />
+    <Image className="logo is--horizontal" src="/media/d/logo-joycollective.svg" alt="The Joy Collective" width={1433} height={217} priority />
   ) : (
-    <Image className="logo is--stacked" src="/media/d/logo-stacked.svg" alt="The Joy Collective" width={1763} height={2499} />
+    <Image className="logo is--stacked" src="/media/d/icon-joycollective.svg" alt="The Joy Collective" width={782} height={746} />
   );
 }
 
@@ -528,7 +528,8 @@ export default function MockupD() {
       // ---------- Founder note: lines rise in as you read; the portrait drifts slowly ----------
       if (!noMotion) {
         qa("[data-letter-reveal]").forEach((n) => gsap.from(n, { y: 28, autoAlpha: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: n, start: "top 88%", once: true } }));
-        gsap.fromTo(".gt .letter__photo img", { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: ".gt .letter", start: "top bottom", end: "bottom top", scrub: true } });
+        // No drift on phones: the portrait sits flush to its top edge there (see d.css).
+        if (!window.matchMedia("(max-width: 767px)").matches) gsap.fromTo(".gt .letter__photo img", { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: ".gt .letter", start: "top bottom", end: "bottom top", scrub: true } });
       }
 
       // ---------- Closing logo: the stacked logo rises in above the sign-up ----------

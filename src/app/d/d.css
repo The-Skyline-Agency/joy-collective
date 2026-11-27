@@ -120,9 +120,15 @@ body:has(.gt) { background: #f0ece0; }
 .gt .nav__inner { position: relative; width: 100%; max-width: var(--container-large); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .gt .nav__logo { display: flex; align-items: center; transition: opacity .3s var(--ease-out); }
 .gt .logo { display: block; width: auto; }
-/* The letters sit at 63.7% of the artwork's height (leaves fill the top), so lift it by the
-   difference, 13.7% of 3.1em, to centre the text, not the whole image, with the nav button. */
-.gt .logo.is--horizontal { height: 3.1em; translate: 0 -.425em; }
+.gt .logo.is--horizontal { height: 2.125rem; }
+/* Phones: the logo shrinks so it keeps a gap before the button. */
+@media (width <= 767px) {
+  .gt .nav__inner { gap: 1.25rem; }
+  .gt .nav__logo { flex: 1; min-width: 0; }
+  .gt .logo.is--horizontal { height: auto; width: 100%; max-width: 14rem; }
+  .gt .nav .btn.is--md .btn__content { padding: .5rem 1rem; }
+  .gt .nav .btn.is--md .btn__text-p { font-size: .875rem; }
+}
 .gt .nav__logo:hover, .gt .nav__logo:focus-visible { opacity: .6; }
 /* ---------- Magnetic button with rolling label ---------- */
 .gt .btn { position: relative; display: inline-block; font-size: 1em; }
@@ -375,10 +381,10 @@ body:has(.gt) { background: #f0ece0; }
 .gt .closing__floor { position: absolute; inset: auto 0 0; display: none; height: 16em; pointer-events: none; background: linear-gradient(to top, var(--accent-deep) 0%, rgb(var(--accent-deep-rgb) / .92) 70%, rgb(var(--accent-deep-rgb) / 0) 100%); }
 .gt .closing__cta { position: relative; width: 100%; max-width: var(--max-width-large); padding: var(--padding-global); display: flex; flex-direction: column; align-items: center; gap: 2em; text-align: center; }
 .gt .closing__text { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--gap-heading-sub); }
-/* Stacked logo above the sign-up heading. */
+/* Logo icon above the sign-up heading. */
 .gt .closing__logo { display: block; margin-bottom: .75em; }
-.gt .closing__logo .logo { height: 14em; margin: 0 auto; }
-@media (width <= 767px) { .gt .closing__logo .logo { height: 8em; } }
+.gt .closing__logo .logo { height: 8rem; margin: 0 auto; }
+@media (width <= 767px) { .gt .closing__logo .logo { height: 5rem; } }
 .gt .closing__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1em; }
 @media (width <= 991px) { .gt .closing { padding-bottom: calc(var(--padding-section-small) + 4.5em + env(safe-area-inset-bottom, 0px)); } }
 @media (width <= 767px) {
@@ -399,7 +405,9 @@ body:has(.gt) { background: #f0ece0; }
 .gt .footer__note { display: flex; flex-direction: column; text-align: right; }
 @media (width <= 767px) {
   .gt .footer__row { flex-direction: column-reverse; align-items: flex-start; }
-  .gt .footer__note { text-align: left; }
+  .gt .footer__note { display: block; text-align: left; }
+  .gt .footer__note span + span::before { content: " "; }
+  .gt .closing { padding-bottom: calc(var(--padding-section-small) + env(safe-area-inset-bottom, 0px)); }
   /* Copyright on its own line, links below, so no separator is left dangling. */
   .gt .footer__meta > span:first-child { flex-basis: 100%; }
   .gt .footer__sep.is--first { display: none; }
@@ -496,6 +504,10 @@ body:has(.gt) { background: #f0ece0; }
 @media (width <= 991px) {
   .gt .letter__inner { grid-template-columns: 1fr; gap: 2.5em; }
   .gt .letter__media { position: relative; top: 0; max-width: 26em; }
+}
+/* Phones: pin the portrait to its top edge, unscaled, so her head is never cropped. */
+@media (width <= 767px) {
+  .gt .letter__photo img { object-position: 50% 0; scale: 1; }
 }
 
 /* ---------- Headings ---------- */
