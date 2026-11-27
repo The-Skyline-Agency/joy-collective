@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 60" width="720" height="120">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&amp;family=Manrope:wght@500&amp;display=swap');
+    .joy{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:40px;fill:#1A1817}
+    .col{font-family:Manrope,Arial,sans-serif;font-weight:500;font-size:12px;letter-spacing:5px;fill:#1A1817}
+  </style>
+  <!-- Mark: circle (the collective) + spark (a little moment of joy) -->
+  <g transform="translate(4 6)" fill="#5A1F2B">
+    <circle cx="24" cy="24" r="22.5" fill="none" stroke="#5A1F2B" stroke-width="1.1"/>
+    <path d="M24 11.5c.85 8.6 4 11.65 12.5 12.5-8.5.85-11.65 3.9-12.5 12.5-.85-8.6-4-11.65-12.5-12.5 8.5-.85 11.65-3.9 12.5-12.5z"/>
+  </g>
+  <text class="joy" x="70" y="43">Joy</text>
+  <line x1="137" y1="16" x2="137" y2="46" stroke="#1A1817" stroke-opacity=".18"/>
+  <text class="col" x="152" y="35">COLLECTIVE</text>
+</svg>

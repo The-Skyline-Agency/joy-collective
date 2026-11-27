@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Pamela's page is a single static file in public/; serve it at the root.
+  async rewrites() {
+    return { beforeFiles: [{ source: "/", destination: "/index.html" }], afterFiles: [], fallback: [] };
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

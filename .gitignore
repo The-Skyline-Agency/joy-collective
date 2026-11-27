@@ -42,3 +42,7 @@ next-env.d.ts
 
 # local tooling
 .claude/
+
+# copied from the repo root by prebuild (Pamela edits index.html and images/ there)
+/public/index.html
+/public/images/
