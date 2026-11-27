@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "mkdir -p public && cp index.html public/ && cp -R media public/",
+    "prebuild": "mkdir -p public && cp index.html favicon.svg favicon-32.png apple-touch-icon.png og-image.png public/ && cp -R media public/",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

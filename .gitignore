@@ -46,3 +46,7 @@ next-env.d.ts
 # copied from the repo root by prebuild (Fernanda edits index.html and media/ there)
 /public/index.html
 /public/media/
+/public/favicon.svg
+/public/favicon-32.png
+/public/apple-touch-icon.png
+/public/og-image.png
