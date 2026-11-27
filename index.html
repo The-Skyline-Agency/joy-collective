@@ -406,7 +406,13 @@ footer .big .fi{fill:var(--latte)}
   .fpanel{position:relative;width:auto;transform:none;box-shadow:none;background:transparent}
   .ftext>*,.ftext h2 .m>span{opacity:1;transform:none;filter:none}
   .ftext>.fline{transform:none}
-  .ovals{display:none}
+  .fgrid{display:none}
+  .fbig{margin-top:0;--ovh:34vw}
+  .ovals{top:calc(105vw - var(--ovh) - 18px);bottom:auto;overflow:visible}
+  .ovals .oset{gap:12px;padding-right:12px}
+  .ovals figure{opacity:0;transform:translateY(60px) scale(1.55);border-radius:18px;transition:opacity .8s var(--ease),transform 1.3s var(--ease),border-radius 1.3s var(--ease)}
+  .ovals figure:nth-child(6n+2){transition-delay:.1s}.ovals figure:nth-child(6n+3){transition-delay:.2s}.ovals figure:nth-child(6n+4){transition-delay:.3s}.ovals figure:nth-child(6n+5){transition-delay:.4s}.ovals figure:nth-child(6n){transition-delay:.5s}
+  .fbig.oin .ovals figure{opacity:1;transform:none;border-radius:999px}
   .ftext{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:auto;max-width:none;transform:none;gap:14px;padding:28px 22px 34px}
   .ftext h2{font-size:48px}.ftext p.body{font-size:16px}.ftext blockquote{font-size:24px;padding-bottom:16px}
   .mtext p.big{font-size:clamp(38px,10.4vw,56px);line-height:1.18}
@@ -430,6 +436,7 @@ footer .big .fi{fill:var(--latte)}
   .fbig{--tx:1}
   .ftext>*,.ftext h2 .m>span{opacity:1;transform:none;filter:none}
   .ftext>.fline{transform:none}
+  .ovals figure{opacity:1 !important;transform:none !important;border-radius:999px !important}
 }
 </style>
 </head>
@@ -702,6 +709,7 @@ footer .big .fi{fill:var(--latte)}
   var hero=document.getElementById('top'),founder=document.getElementById('founder');
   var fstick=document.getElementById('fstick'),fbig=document.getElementById('fbig'),fslot=document.querySelector('.ft.slot'),tilesF=Array.prototype.slice.call(document.querySelectorAll('.ft:not(.slot)'));
   new IntersectionObserver(function(es){if(es[0].isIntersecting)document.getElementById('fgrid').classList.add('in')},{threshold:.15}).observe(document.getElementById('fgrid'));
+  new IntersectionObserver(function(es){if(es[0].isIntersecting)fbig.classList.add('oin')},{threshold:.3}).observe(fbig);
   function placeF(t){
     if(mobile.matches){fbig.style.cssText='';return}
     var c=fstick.getBoundingClientRect(),r=fslot.getBoundingClientRect();
