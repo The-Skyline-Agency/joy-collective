@@ -42,3 +42,7 @@ next-env.d.ts
 
 # local tooling
 .claude/
+
+# copied from the repo root by prebuild (Fernanda edits index.html and media/ there)
+/public/index.html
+/public/media/
