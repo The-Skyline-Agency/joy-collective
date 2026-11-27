@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import MockupD from "@/components/MockupD";
-import "./d/d.css";
+import "./d.css";
 
 export const metadata: Metadata = { title: "The Joy Collective (Mockup D)" };
 

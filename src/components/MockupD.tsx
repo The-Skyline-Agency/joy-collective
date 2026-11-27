@@ -25,15 +25,15 @@ CustomEase.create("radial", "0.25, 0.1, 0, 1");
 // General Sans comes from Fontshare (ITF Free Font License), Geist Mono from Google Fonts.
 const generalSans = localFont({
   src: [
-    { path: "../app/d/fonts/GeneralSans-Medium.woff2", weight: "500" },
-    { path: "../app/d/fonts/GeneralSans-Semibold.woff2", weight: "600" },
+    { path: "../app/fonts/GeneralSans-Medium.woff2", weight: "500" },
+    { path: "../app/fonts/GeneralSans-Semibold.woff2", weight: "600" },
   ],
   variable: "--font-gs",
 });
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: "400", variable: "--font-gm" });
 // Headings: Times New Roman MT Condensed, the face on Adriana's quote posts (converted to WOFF2).
 // Monotype font: confirm the web licence before launch.
-const timesCondensed = localFont({ src: "../app/d/fonts/TimesNewRomanMTCondensed.woff2", weight: "400", variable: "--font-serif" });
+const timesCondensed = localFont({ src: "../app/fonts/TimesNewRomanMTCondensed.woff2", weight: "400", variable: "--font-serif" });
 
 // Draft copy for Adriana to edit. Structure follows the reference, words are ours.
 const P = {
