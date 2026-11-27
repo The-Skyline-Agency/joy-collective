@@ -1,5 +1,5 @@
 /* Mockup D: layout, type scale and motion values follow the goodtimestimer.com reference.
-   Palette: cream from her quote posts, greens from the Joy Collective invite (replacing the reference orange).
+   Palette: cream from her quote posts, beige and camel tones (replacing the reference orange).
    Everything is scoped under .gt so mockups A, B and C keep their own styles. */
 
 @property --reveal { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
@@ -26,10 +26,10 @@ body:has(.gt) { background: #f0ece0; }
   --border-white-tertiary: #ffffff1a;
   --border-dark-tertiary: #0c05001a;
   --bg-scrim: #0c050033;
-  --accent-rgb: 94 118 82;
+  --accent-rgb: 154 120 83;
   --accent: rgb(var(--accent-rgb));
-  --accent-tint: #d6ddc3;
-  --accent-deep-rgb: 63 79 55;
+  --accent-tint: #e8dcc6;
+  --accent-deep-rgb: 110 85 56;
   --accent-deep: rgb(var(--accent-deep-rgb));
   --container-large: 80em;
   --max-width-large: 48em;
@@ -200,8 +200,8 @@ body:has(.gt) { background: #f0ece0; }
 .gt .idea-zone__content { position: relative; z-index: 1; }
 .gt .bg-elements { position: absolute; inset: 0; z-index: 0; isolation: isolate; overflow: hidden; pointer-events: none; background: var(--bg-page); }
 .gt .bg-wash { position: absolute; border-radius: 50%; filter: blur(5em); }
-.gt .bg-wash.is--warm-r { right: -24em; top: 8%; width: 40em; height: 120em; rotate: 23deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .95), rgb(var(--accent-rgb) / .55) 45%, #c9d4b4 70%, transparent); }
-.gt .bg-wash.is--warm-l { left: -30em; top: 30%; width: 44em; height: 60em; rotate: -20deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .55), #c9d4b4 55%, transparent); }
+.gt .bg-wash.is--warm-r { right: -24em; top: 8%; width: 40em; height: 120em; rotate: 23deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .95), rgb(var(--accent-rgb) / .55) 45%, #dcc9a8 70%, transparent); }
+.gt .bg-wash.is--warm-l { left: -30em; top: 30%; width: 44em; height: 60em; rotate: -20deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .55), #dcc9a8 55%, transparent); }
 .gt .bg-wash.is--white-1 { left: 18%; top: 2%; width: 64em; height: 64em; background: radial-gradient(closest-side, #fff, #fffc 50%, transparent); mix-blend-mode: screen; }
 .gt .bg-wash.is--white-2 { left: 22%; top: 30%; width: 58em; height: 58em; background: radial-gradient(closest-side, #fff, #fff9 55%, transparent); mix-blend-mode: lighten; }
 /* Phones: the washes reach the bottom of their clipped box, so fade the box out instead of a hard edge. */
@@ -340,7 +340,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .social__stack { position: relative; flex: none; width: 24.5625em; height: 7.625em; }
 .gt .notif { position: absolute; width: 23.5625em; height: 4.125em; overflow: hidden; transform-origin: 0 0; border-radius: 1.5em; background-color: #ffffff70; backdrop-filter: blur(1.25em) saturate(180%); box-shadow: inset 0 0 0 .5px #ffffff80, var(--shadow-drop-sm); font-family: var(--font-system); will-change: transform; }
 .gt .notif[data-slot="0"] { background-color: #ffffff9e; }
-.gt .notif__icon { position: absolute; top: .875em; left: .875em; display: grid; place-items: center; width: 2.375em; height: 2.375em; overflow: hidden; border-radius: .53125em; color: #fff; background: radial-gradient(3.28em at 99% 99%, #d6ddc3 0%, #c2cfae 16.5%, #a9bf94 33%, #8fa67b 49.5%, #7a9068 57.75%, #6e855e 61.875%, #5e7652 66%, #4c6143 83%, #445a3c 91.5%, #3f4f37 100%); }
+.gt .notif__icon { position: absolute; top: .875em; left: .875em; display: grid; place-items: center; width: 2.375em; height: 2.375em; overflow: hidden; border-radius: .53125em; color: #fff; background: radial-gradient(3.28em at 99% 99%, #e8dcc6 0%, #dcc9a8 16.5%, #cbb08a 33%, #b9996f 49.5%, #ad8b62 57.75%, #a4825b 61.875%, #9a7853 66%, #85674a 83%, #7a5e41 91.5%, #6e5538 100%); }
 .gt .notif__icon svg { width: 64%; height: auto; }
 .gt :is(.notif__title, .notif__time, .notif__message) { position: absolute; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .gt .notif__title { top: .875em; left: 3.875em; right: 5em; font-size: .9375em; font-weight: 600; line-height: 1.3333; letter-spacing: -.0267em; color: #000; }
@@ -447,7 +447,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .bento__card { position: relative; min-height: 25em; padding: 2em; overflow: hidden; border-radius: 1.75em; display: flex; flex-direction: column; justify-content: space-between; gap: 2.5em; transition: translate .6s var(--ease-osmo); }
 .gt .bento__card:hover { translate: 0 -.35em; }
 .gt .bento__card.is--soft { background: #e7e9dc; }
-.gt .bento__card.is--accent { background: #cdd9ab; }
+.gt .bento__card.is--accent { background: #e2d0ae; }
 .gt .bento__icon { display: grid; place-items: center; width: 3.5em; height: 3.5em; border-radius: 1em; background: #ffffffd9; color: var(--accent-deep); }
 .gt .bento__icon svg { width: 1.5em; height: 1.5em; }
 .gt .bento__text { display: flex; flex-direction: column; gap: .5em; }
@@ -455,14 +455,14 @@ body:has(.gt) { background: #f0ece0; }
 .gt .bento__stat { font-size: 3.5em; line-height: 1; letter-spacing: -.04em; font-weight: 500; color: var(--fg-base); margin: .1em 0 .15em; }
 .gt .bento__body { max-width: 18em; font-size: var(--size-text-regular); line-height: var(--leading-text); color: #3d3c39; }
 .gt .bento__faces { display: flex; margin-top: 1em; }
-.gt .bento__face { position: relative; width: 2.5em; height: 2.5em; overflow: hidden; border-radius: 50%; border: 2px solid #cdd9ab; margin-left: -.55em; background: var(--bg-muted); }
+.gt .bento__face { position: relative; width: 2.5em; height: 2.5em; overflow: hidden; border-radius: 50%; border: 2px solid #e2d0ae; margin-left: -.55em; background: var(--bg-muted); }
 .gt .bento__face:first-child { margin-left: 0; }
 .gt .bento__face img { object-fit: cover; }
 .gt .bento__card.is--photo { justify-content: flex-end; align-items: flex-start; padding: 1.25em; background: var(--bg-contrast); }
 /* Mirrored and zoomed toward the two faces. */
 .gt .bento__card.is--photo img { object-fit: cover; scale: -1.3 1.3; transform-origin: 55% 50%; translate: 0 -10%; transition: scale .9s var(--ease-osmo); }
 .gt .bento__card.is--photo:hover img { scale: -1.34 1.34; }
-.gt .bento__chip { position: relative; max-width: 15em; padding: 1.5em; border-radius: 1.25em; background: var(--accent); color: #fff; display: flex; flex-direction: column; gap: .4em; box-shadow: 0 1em 2em -1em #1f2a1a66; }
+.gt .bento__chip { position: relative; max-width: 15em; padding: 1.5em; border-radius: 1.25em; background: var(--accent); color: #fff; display: flex; flex-direction: column; gap: .4em; box-shadow: 0 1em 2em -1em #2a1f1466; }
 .gt .bento__chip-title { font-size: 1.75em; line-height: 1.05; letter-spacing: -.03em; font-weight: 500; }
 .gt .bento__chip-body { font-size: var(--size-text-small); line-height: var(--leading-text); color: #ffffffd9; }
 @media (width <= 991px) {
