@@ -6,30 +6,30 @@
 
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
-body:has(.gt) { background: #f0ece0; }
+body:has(.gt) { background: #eeebe2; }
 
 .gt {
   --size-container-ideal: 1440;
   --size-container: clamp(992px, 100vw, 1920px);
   --size-font: max(16px, calc(var(--size-container) / (var(--size-container-ideal) / 16)));
-  --fg-base: #1e1d1b;
-  --fg-muted: #5a5753;
-  --fg-strong: #131214;
-  --bg-contrast: #1e1d1b;
+  --fg-base: #000000;
+  --fg-muted: #4f4a43;
+  --fg-strong: #000000;
+  --bg-contrast: #2a2723;
   --bg-overlay-white: #ffffffb8;
   --white: #fff;
-  --bg-page: #f0ece0;
-  --bg-muted: #e6e2d4;
-  --bg-subtle: #dad6c6;
+  --bg-page: #eeebe2;
+  --bg-muted: #d5cdbf;
+  --bg-subtle: #c9c1b5;
   --bg-interactive: #fffc;
   --border-white-primary: #ffffff80;
   --border-white-tertiary: #ffffff1a;
-  --border-dark-tertiary: #0c05001a;
-  --bg-scrim: #0c050033;
-  --accent-rgb: 154 120 83;
+  --border-dark-tertiary: #1514121a;
+  --bg-scrim: #15141233;
+  --accent-rgb: 125 117 106;
   --accent: rgb(var(--accent-rgb));
-  --accent-tint: #e8dcc6;
-  --accent-deep-rgb: 110 85 56;
+  --accent-tint: #d5cdbf;
+  --accent-deep-rgb: 90 83 74;
   --accent-deep: rgb(var(--accent-deep-rgb));
   --container-large: 80em;
   --max-width-large: 48em;
@@ -203,7 +203,7 @@ body:has(.gt) { background: #f0ece0; }
   .gt .h1.hero__heading { font-size: calc(var(--size-h1) * 1.5); line-height: .9; }
   /* The loop has bright frames; a soft shadow keeps the copy readable on every one of them. */
   .gt :is(.hero__heading, .hero__body) { text-shadow: 0 .125rem 1.5rem rgb(30 29 27 / .45); }
-  .gt .hero__body { max-width: 30rem; color: rgb(240 236 224 / .92); }
+  .gt .hero__body { max-width: 30rem; color: rgb(248 246 241 / .92); }
   .gt .hero__actions { justify-content: flex-start; }
   .gt .hero__body br { display: none; }
 }
@@ -234,8 +234,8 @@ body:has(.gt) { background: #f0ece0; }
 .gt .idea-zone__content { position: relative; z-index: 1; }
 .gt .bg-elements { position: absolute; inset: 0; z-index: 0; isolation: isolate; overflow: hidden; pointer-events: none; background: var(--bg-page); }
 .gt .bg-wash { position: absolute; border-radius: 50%; filter: blur(5em); }
-.gt .bg-wash.is--warm-r { right: -24em; top: 8%; width: 40em; height: 120em; rotate: 23deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .95), rgb(var(--accent-rgb) / .55) 45%, #dcc9a8 70%, transparent); }
-.gt .bg-wash.is--warm-l { left: -30em; top: 30%; width: 44em; height: 60em; rotate: -20deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .55), #dcc9a8 55%, transparent); }
+.gt .bg-wash.is--warm-r { right: -24em; top: 8%; width: 40em; height: 120em; rotate: 23deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .95), rgb(var(--accent-rgb) / .55) 45%, #a49b8e 70%, transparent); }
+.gt .bg-wash.is--warm-l { left: -30em; top: 30%; width: 44em; height: 60em; rotate: -20deg; background: radial-gradient(closest-side, rgb(var(--accent-rgb) / .55), #a49b8e 55%, transparent); }
 .gt .bg-wash.is--white-1 { left: 18%; top: 2%; width: 64em; height: 64em; background: radial-gradient(closest-side, #fff, #fffc 50%, transparent); mix-blend-mode: screen; }
 .gt .bg-wash.is--white-2 { left: 22%; top: 30%; width: 58em; height: 58em; background: radial-gradient(closest-side, #fff, #fff9 55%, transparent); mix-blend-mode: lighten; }
 /* Phones: the washes reach the bottom of their clipped box, so fade the box out instead of a hard edge. */
@@ -371,7 +371,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .social__content { width: 100%; max-width: var(--container-large); margin: 0 auto var(--padding-section-small); display: grid; grid-template-columns: 1.5fr 1fr; align-items: end; gap: 4rem; }
 .gt .social__heading { max-width: 16ch; text-wrap: balance; }
 .gt .social__aside { display: flex; flex-direction: column; gap: 1.25rem; padding-bottom: .5rem; }
-.gt .social__body { max-width: 26rem; font-size: var(--size-text-regular); line-height: var(--leading-text); letter-spacing: var(--tracking-text-regular); color: rgb(240 236 224 / .72); }
+.gt .social__body { max-width: 26rem; font-size: var(--size-text-regular); line-height: var(--leading-text); letter-spacing: var(--tracking-text-regular); color: rgb(248 246 241 / .72); }
 .gt .social__frame { position: relative; isolation: isolate; width: 100%; max-width: var(--container-large); aspect-ratio: 1280 / 720; margin: 0 auto; overflow: hidden; border-radius: var(--radius-xlarge); background: #000; transform: translateZ(0); }
 .gt .social__media { position: absolute; inset: -8% 0; }
 .gt .social__media img { object-fit: cover; }

@@ -24,11 +24,11 @@ const tones = {
   },
   // Mockup D: cream field, camel button that deepens on hover.
   gt: {
-    wrap: "bg-[#f0ece0] ring-1 ring-[#0c0500]/10 transition-shadow focus-within:ring-2 focus-within:ring-[#9a7853]",
+    wrap: "bg-[#f8f6f1] ring-1 ring-[#151412]/10 transition-shadow focus-within:ring-2 focus-within:ring-[#7d756a]",
     // 16px: iOS zooms the page on focus for anything smaller.
-    input: "text-base text-[#1e1d1b] placeholder:text-[#5a5753]",
-    button: "bg-[#9a7853] text-white hover:bg-[#6e5538]",
-    note: "text-[#5a5753]",
+    input: "text-base text-[#000000] placeholder:text-[#4f4a43]",
+    button: "bg-[#7d756a] text-white hover:bg-[#5a534a]",
+    note: "text-[#4f4a43]",
   },
 };
 
