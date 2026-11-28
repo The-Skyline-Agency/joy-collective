@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import localFont from "next/font/local";
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Poppins } from "next/font/google";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -22,14 +22,8 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, Flip, Draggable, InertiaP
 CustomEase.create("osmo", "M0,0 C0.625,0.05 0,1 1,1");
 CustomEase.create("radial", "0.25, 0.1, 0, 1");
 
-// General Sans comes from Fontshare (ITF Free Font License), Geist Mono from Google Fonts.
-const generalSans = localFont({
-  src: [
-    { path: "../app/fonts/GeneralSans-Medium.woff2", weight: "500" },
-    { path: "../app/fonts/GeneralSans-Semibold.woff2", weight: "600" },
-  ],
-  variable: "--font-gs",
-});
+// Poppins and Geist Mono come from Google Fonts. (General Sans files stay in app/fonts in case we switch back.)
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-poppins" });
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: "400", variable: "--font-gm" });
 // Headings: Times New Roman MT Condensed, the face on Adriana's quote posts (converted to WOFF2).
 // Monotype font: confirm the web licence before launch.
@@ -210,6 +204,9 @@ export default function MockupD() {
       const qa = <T extends Element = HTMLElement>(s: string) => Array.from(el.querySelectorAll<T>(s));
       const cleanups: (() => void)[] = [];
       const noMotion = reduced();
+
+      // ---------- Nav: past 100px the bar drops its links and narrows (styles in d.css) ----------
+      ScrollTrigger.create({ start: 100, end: "max", toggleClass: { targets: ".gt .nav", className: "is--scrolled" } });
 
       // ---------- Loader: stacked cards spring in, fly away, page slides up ----------
       const loader = q(".loader");
@@ -807,7 +804,7 @@ export default function MockupD() {
   const wheel = [...cards, ...cards];
 
   return (
-    <div ref={root} className={`gt ${generalSans.variable} ${geistMono.variable} ${timesCondensed.variable}`}>
+    <div ref={root} className={`gt ${poppins.variable} ${geistMono.variable} ${timesCondensed.variable}`}>
       <div className="loader" aria-hidden>
         <div className="loader__screen">
           <div className="loader__bg" />
@@ -834,6 +831,12 @@ export default function MockupD() {
           <a href="#top" className="nav__logo" aria-label="The Joy Collective, back to top">
             <Wordmark horizontal />
           </a>
+          <ul className="nav__links">
+            <li><a href="#the-idea">The idea</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#circles">Circles</a></li>
+            <li><a href="#founder">Our story</a></li>
+          </ul>
           <Btn size="md" onClick={openModal}>
             Join the list
           </Btn>
@@ -1176,7 +1179,7 @@ export default function MockupD() {
       <div className="modal" data-modal={modal ? "active" : "not-active"}>
         <div className="modal__dark" onClick={() => setModal(false)} />
         <div ref={cardRef} className="modal__card" role="dialog" aria-modal="true" aria-labelledby="join-h" tabIndex={-1} inert={!modal}>
-          <SunMark className="modal__mark" />
+          <Image className="modal__mark" src="/media/d/icon-joycollective.svg" alt="" width={782} height={746} />
           <h2 className="modal__h" id="join-h">
             Join the list
           </h2>

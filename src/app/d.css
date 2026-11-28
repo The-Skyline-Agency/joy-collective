@@ -44,17 +44,18 @@ body:has(.gt) { background: #f0ece0; }
   --radius-large: 1.25em;
   --radius-xlarge: 2em;
   --radius-full: 9999px;
-  --font-sans: var(--font-gs), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-gm), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --size-h1: 5.25em;
   --size-h2: 3.75em;
   --size-h4: 2.5em;
   --size-h5: 2em;
-  --size-h6: 1.625em;
-  --size-text-regular: 1.125em;
-  --size-text-small: 1em;
-  --size-label-sm: .875em;
+  --size-h6: 1.5em;
+  /* Poppins runs large, so body sizes sit about 2px under what General Sans used. */
+  --size-text-regular: 1em;
+  --size-text-small: .875em;
+  --size-label-sm: .8125em;
   --leading-h1: 1.1;
   --leading-h2: 1.08;
   --leading-h4: 1.12;
@@ -82,7 +83,7 @@ body:has(.gt) { background: #f0ece0; }
   .gt { --size-container-ideal: 834; --size-container: clamp(768px, 100vw, 991px); --padding-global: 2.5em; --padding-section-large: 4.5em; --padding-section-small: 2.5em; --gap-section-head: 3em; --size-h1: 3.25em; --size-h2: 2.75em; }
 }
 @media (width <= 767px) {
-  .gt { --size-text-regular: 1rem; --size-container-ideal: 550; --size-container: clamp(480px, 100vw, 767px); --padding-global: 2em; --padding-section-large: 3.25em; --padding-section-small: 2em; --gap-section-head: 2em; --gap-heading-sub: .75em; --size-h1: 3em; --size-h2: 2.25em; --size-h4: 2em; --size-h5: 1.625em; }
+  .gt { --size-text-regular: .9375rem; --size-container-ideal: 550; --size-container: clamp(480px, 100vw, 767px); --padding-global: 2em; --padding-section-large: 3.25em; --padding-section-small: 2em; --gap-section-head: 2em; --gap-heading-sub: .75em; --size-h1: 3em; --size-h2: 2.25em; --size-h4: 2em; --size-h5: 1.625em; }
 }
 @media (width <= 479px) {
   .gt { --size-container-ideal: 390; --size-container: clamp(320px, 100vw, 479px); --padding-global: 1.5em; --padding-section-large: 2.5em; --size-h1: 2.5em; --size-h2: 1.875em; --tracking-h1: -.03em; }
@@ -116,23 +117,37 @@ body:has(.gt) { background: #f0ece0; }
 .gt .pb-5 { backdrop-filter: blur(1.5em); mask: linear-gradient(#000 0%, #0000 12%); }
 
 /* ---------- Nav ---------- */
-.gt .nav { position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 4.5em; padding: 0 var(--padding-global); display: flex; align-items: center; }
-.gt .nav__inner { position: relative; width: 100%; max-width: var(--container-large); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.gt .nav { position: fixed; top: 0; left: 0; z-index: 50; width: 100%; padding: 1rem var(--padding-global) 0; display: flex; align-items: center; }
+/* White bar that holds the logo, links and button. */
+.gt .nav__inner { position: relative; width: 100%; max-width: var(--container-large); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: .625rem .625rem .625rem 1.5rem; border-radius: 999px; background: #fff; box-shadow: 0 .5rem 2rem rgb(0 0 0 / .06); }
 .gt .nav__logo { display: flex; align-items: center; transition: opacity .3s var(--ease-out); }
 .gt .logo { display: block; width: auto; }
 .gt .logo.is--horizontal { height: 2.125rem; }
 /* Phones: the logo shrinks so it keeps a gap before the button. */
 @media (width <= 767px) {
-  .gt .nav__inner { gap: 1.25rem; }
+  .gt .nav { padding-top: .75rem; }
+  .gt .nav__inner { gap: 1.25rem; padding: .5rem .5rem .5rem 1.125rem; }
   .gt .nav__logo { flex: 1; min-width: 0; }
   .gt .logo.is--horizontal { height: auto; width: 100%; max-width: 14rem; }
   .gt .nav .btn.is--md .btn__content { padding: .5rem 1rem; }
-  .gt .nav .btn.is--md .btn__text-p { font-size: .875rem; }
+  .gt .nav .btn.is--md .btn__text-p { font-size: .8125rem; }
 }
 .gt .nav__logo:hover, .gt .nav__logo:focus-visible { opacity: .6; }
+/* Section links, centred in the bar. Desktop only. */
+.gt .nav__links { position: absolute; left: 50%; translate: -50% 0; display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none; }
+.gt .nav__links a { color: var(--fg-base); font-size: var(--size-text-small); text-decoration: none; transition: opacity .3s var(--ease-out); }
+.gt .nav__links a:hover, .gt .nav__links a:focus-visible { opacity: .6; }
+@media (width <= 991px) { .gt .nav__links { display: none; } }
+/* Scrolled past 100px: links fade out and the bar narrows to 450px. */
+.gt .nav__inner { transition: max-width .6s var(--ease-out); }
+.gt .nav__links { transition: opacity .3s var(--ease-out), visibility 0s; }
+.gt .nav.is--scrolled .nav__inner { max-width: 450px; }
+/* visibility waits for the fade, then takes the links out of the tab order */
+.gt .nav.is--scrolled .nav__links { opacity: 0; visibility: hidden; transition: opacity .2s var(--ease-out), visibility 0s .2s; }
+@media (prefers-reduced-motion: reduce) { .gt :is(.nav__inner, .nav__links) { transition: none; } }
 /* ---------- Magnetic button with rolling label ---------- */
 .gt .btn { position: relative; display: inline-block; font-size: 1em; }
-.gt .btn__click { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border-radius: var(--radius-medium); overflow: hidden; font: inherit; letter-spacing: inherit; cursor: pointer; }
+.gt .btn__click { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border-radius: 999px; overflow: hidden; font: inherit; letter-spacing: inherit; cursor: pointer; }
 .gt .btn__fill { position: absolute; inset: 0; border-radius: inherit; }
 .gt .btn__content { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: .75em 2em; }
 .gt .btn__text { position: relative; overflow: hidden; }
@@ -145,7 +160,6 @@ body:has(.gt) { background: #f0ece0; }
 .gt .btn.is--secondary .btn__text-p { color: var(--fg-base); }
 .gt .btn.is--lg .btn__click { height: 3.25em; }
 .gt .btn.is--lg .btn__content { padding: 0 2em; }
-.gt .btn.is--md .btn__click { border-radius: var(--radius-small); }
 .gt .btn.is--md .btn__content { padding: .5em 1.25em; }
 .gt :is(.btn.is--lg, .btn.is--md) .btn__text-p { font-size: var(--size-text-small); }
 .gt .btn.is--soon .btn__click { cursor: not-allowed; }
@@ -193,10 +207,8 @@ body:has(.gt) { background: #f0ece0; }
   .gt .h1.hero__heading { font-size: calc(var(--size-h1) * 1.45); }
   .gt :is(.hero__heading, .hero__body) br { display: none; }
 }
-/* Phones: buttons get half the corner radius and sit closer together. */
+/* Phones: buttons sit closer together. */
 @media (width <= 767px) {
-  .gt .btn .btn__click { border-radius: calc(var(--radius-medium) / 2); }
-  .gt .btn.is--md .btn__click { border-radius: calc(var(--radius-small) / 2); }
   .gt :is(.hero__actions, .closing__actions) { gap: .5em; }
 }
 @media (width <= 479px) { .gt .hero__actions { flex-direction: column; align-items: stretch; width: 100%; } .gt .hero__actions .btn { width: 100%; display: block; } }
@@ -276,7 +288,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .card__blur .is--3 { backdrop-filter: blur(1.75em); mask: linear-gradient(#0000 70%, #000 100%); }
 .gt .card__tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(#0000 0%, #000000b8 100%); }
 .gt .card__title { position: relative; flex: 1 0 0; color: var(--white); font-size: var(--size-h6); line-height: 1.12; letter-spacing: var(--tracking-h6); }
-@media (width <= 767px) { .gt .card__title { font-size: 1.25em; } }
+@media (width <= 767px) { .gt .card__title { font-size: 1.125em; } }
 
 /* ---------- Steps: autoplaying tabs ---------- */
 .gt .steps { padding: var(--padding-section-large) var(--padding-global); }
@@ -291,7 +303,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .steps__main { width: 100%; display: flex; align-items: flex-start; gap: 1em; }
 .gt .steps__nr { flex: none; display: grid; place-items: center; width: calc(var(--size-font) * 1.875); height: calc(var(--size-font) * 1.875); border-radius: var(--radius-full); background: var(--bg-subtle); border: 1px solid var(--border-dark-tertiary); font-family: var(--font-mono); font-size: var(--size-label-sm); font-weight: 400; letter-spacing: -.04em; line-height: 1; color: var(--fg-base); }
 .gt .steps__text { min-width: 0; flex: 1 0 0; display: flex; flex-direction: column; }
-.gt .steps__title { display: block; font-size: var(--size-h5); line-height: 1.12; letter-spacing: -.03em; }
+.gt .steps__title { display: block; font-size: 1.875em; line-height: 1.12; letter-spacing: -.03em; }
 .gt .steps__detail { display: block; height: 0; overflow: hidden; }
 .gt .steps__detail-inner { display: block; padding-top: 1em; font-size: var(--size-text-regular); line-height: var(--leading-text); letter-spacing: var(--tracking-text-regular); color: var(--fg-muted); }
 .gt .steps__rule { position: absolute; inset: auto 0 0; display: block; width: 100%; height: 1px; background: var(--border-dark-tertiary); }
@@ -313,7 +325,7 @@ body:has(.gt) { background: #f0ece0; }
   .gt .steps__list { max-width: none; }
   .gt .steps__visuals { max-width: 26em; margin: 0 auto; }
 }
-@media (width <= 767px) { .gt .steps__title { font-size: 1.5em; } .gt .steps__layout { gap: 2.5em; } .gt .steps__col { gap: 2em; } }
+@media (width <= 767px) { .gt .steps__title { font-size: 1.375em; } .gt .steps__layout { gap: 2.5em; } .gt .steps__col { gap: 2em; } }
 /* Phones: centred title, then the photo, then the list. The text column dissolves so its two
    children can sit either side of the photo; the photo grows to fill more of its green frame. */
 @media (width <= 767px) {
@@ -435,10 +447,14 @@ body:has(.gt) { background: #f0ece0; }
 .gt .modal__card:focus { outline: none; }
 .gt [data-modal="active"] .modal__dark { opacity: 1; visibility: visible; }
 .gt [data-modal="active"] .modal__card { opacity: 1; visibility: visible; transform: translateY(0%) rotate(.001deg); }
-.gt .modal__mark { width: 3.5em; height: 3.5em; color: var(--accent); }
+.gt .modal__mark { width: auto; height: 3.5em; }
+/* The icon turns slowly in the popup and above the closing sign-up. GSAP moves .closing__logo, so the spin sits on the img inside it. */
+@keyframes gt-spin { to { rotate: 360deg; } }
+.gt :is(.modal__mark, .closing__logo .logo) { animation: gt-spin 24s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .gt :is(.modal__mark, .closing__logo .logo) { animation: none; } }
 .gt .modal__h { text-align: center; font-size: var(--size-h6); line-height: 1.12; letter-spacing: var(--tracking-h6); }
 .gt .modal__p { text-align: center; color: var(--fg-muted); font-size: var(--size-text-small); line-height: var(--leading-text); }
-.gt .modal__close { position: absolute; top: 1.5em; right: 1.5em; display: flex; justify-content: center; align-items: center; width: 2em; height: 2em; border-radius: var(--radius-xsmall); }
+.gt .modal__close { position: absolute; top: 1.5em; right: 1.5em; display: flex; justify-content: center; align-items: center; width: 2em; height: 2em; border-radius: 999px; }
 .gt .modal__close span { position: absolute; width: 1.5em; height: .09375em; background: var(--fg-base); rotate: -45deg; }
 .gt .modal__close span + span { rotate: 45deg; }
 .gt .modal form { font-size: .9em; }
@@ -460,7 +476,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .bento__icon svg { width: 1.5em; height: 1.5em; }
 .gt .bento__text { display: flex; flex-direction: column; gap: .5em; }
 .gt .bento__label { font-size: var(--size-text-small); font-weight: 500; color: var(--fg-base); }
-.gt .bento__stat { font-size: 3.5em; line-height: 1; letter-spacing: -.04em; font-weight: 500; color: var(--fg-base); margin: .1em 0 .15em; }
+.gt .bento__stat { font-size: 3.25em; line-height: 1; letter-spacing: -.04em; font-weight: 500; color: var(--fg-base); margin: .1em 0 .15em; }
 .gt .bento__body { max-width: 18em; font-size: var(--size-text-regular); line-height: var(--leading-text); color: #3d3c39; }
 .gt .bento__faces { display: flex; margin-top: 1em; }
 .gt .bento__face { position: relative; width: 2.5em; height: 2.5em; overflow: hidden; border-radius: 50%; border: 2px solid #e2d0ae; margin-left: -.55em; background: var(--bg-muted); }
@@ -471,7 +487,7 @@ body:has(.gt) { background: #f0ece0; }
 .gt .bento__card.is--photo img { object-fit: cover; scale: -1.3 1.3; transform-origin: 55% 50%; translate: 0 -10%; transition: scale .9s var(--ease-osmo); }
 .gt .bento__card.is--photo:hover img { scale: -1.34 1.34; }
 .gt .bento__chip { position: relative; max-width: 15em; padding: 1.5em; border-radius: 1.25em; background: var(--accent); color: #fff; display: flex; flex-direction: column; gap: .4em; box-shadow: 0 1em 2em -1em #2a1f1466; }
-.gt .bento__chip-title { font-size: 1.75em; line-height: 1.05; letter-spacing: -.03em; font-weight: 500; }
+.gt .bento__chip-title { font-size: 1.625em; line-height: 1.05; letter-spacing: -.03em; font-weight: 500; }
 .gt .bento__chip-body { font-size: var(--size-text-small); line-height: var(--leading-text); color: #ffffffd9; }
 @media (width <= 991px) {
   .gt .bento { grid-template-columns: 1fr 1fr; }
@@ -493,13 +509,13 @@ body:has(.gt) { background: #f0ece0; }
 .gt .letter__body { display: flex; flex-direction: column; gap: 1.5em; padding-top: 1em; }
 .gt .letter__eyebrow { width: fit-content; padding: .35em .9em; border-radius: 999px; background: rgb(var(--accent-rgb) / .12); color: var(--accent-deep); font-size: var(--size-text-small); }
 .gt .letter__greeting { text-wrap: balance; margin-bottom: .25em; }
-.gt .letter__p { max-width: 34em; font-size: 1.125em; line-height: 1.65; color: var(--fg-muted); }
+.gt .letter__p { max-width: 34em; font-size: 1em; line-height: 1.65; color: var(--fg-muted); }
 .gt .letter__values { list-style: none; margin: .5em 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--border-dark-tertiary); }
-.gt .letter__values li { padding: 1em 0; border-bottom: 1px solid var(--border-dark-tertiary); font-size: 1.375em; letter-spacing: -.02em; color: var(--fg-muted); }
+.gt .letter__values li { padding: 1em 0; border-bottom: 1px solid var(--border-dark-tertiary); font-size: 1.25em; letter-spacing: -.02em; color: var(--fg-muted); }
 .gt .letter__values strong { font-weight: 500; color: var(--accent-deep); }
-.gt .letter__closing { max-width: 22em; font-size: 1.75em; line-height: 1.3; letter-spacing: -.03em; font-weight: 500; color: var(--fg-base); text-wrap: balance; }
+.gt .letter__closing { max-width: 22em; font-size: 1.625em; line-height: 1.3; letter-spacing: -.03em; font-weight: 500; color: var(--fg-base); text-wrap: balance; }
 .gt .letter__sign { display: flex; flex-direction: column; gap: .15em; color: var(--fg-muted); }
-.gt .letter__name { margin-top: .35em; font-size: 1.5em; font-weight: 500; letter-spacing: -.02em; color: var(--fg-base); }
+.gt .letter__name { margin-top: .35em; font-size: 1.375em; font-weight: 500; letter-spacing: -.02em; color: var(--fg-base); }
 .gt .letter__role { font-size: var(--size-text-small); }
 @media (width <= 991px) {
   .gt .letter__inner { grid-template-columns: 1fr; gap: 2.5em; }
@@ -532,9 +548,9 @@ body:has(.gt) { background: #f0ece0; }
 @media (width <= 767px) {
   .gt :is(.hero__body, .activities .sub, .steps__detail-inner, .social__body, .notif__message, .moments .sub,
     .bento__label, .bento__body, .bento__chip-body, .letter__tag, .letter__eyebrow, .letter__p,
-    .letter__sign > span:not(.letter__name), .closing__text .text-regular) { font-size: 1rem; }
+    .letter__sign > span:not(.letter__name), .closing__text .text-regular) { font-size: .9375rem; }
 }
 /* Phones: the three values in the founder letter. */
-@media (width <= 767px) { .gt .letter__values li { font-size: 1.125rem; padding: 1rem 0; } }
+@media (width <= 767px) { .gt .letter__values li { font-size: 1rem; padding: 1rem 0; } }
 /* Phones: the letter's closing line and Adriana's name. */
-@media (width <= 767px) { .gt :is(.letter__closing, .letter__name) { font-size: 2rem; } }
+@media (width <= 767px) { .gt :is(.letter__closing, .letter__name) { font-size: 1.875rem; } }
