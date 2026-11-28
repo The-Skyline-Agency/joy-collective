@@ -24,8 +24,9 @@ const tones = {
   },
   // Mockup D: cream field, camel button that deepens on hover.
   gt: {
-    wrap: "bg-[#f0ece0] ring-1 ring-[#0c0500]/10",
-    input: "text-[#1e1d1b] placeholder:text-[#5a5753]",
+    wrap: "bg-[#f0ece0] ring-1 ring-[#0c0500]/10 transition-shadow focus-within:ring-2 focus-within:ring-[#9a7853]",
+    // 16px: iOS zooms the page on focus for anything smaller.
+    input: "text-base text-[#1e1d1b] placeholder:text-[#5a5753]",
     button: "bg-[#9a7853] text-white hover:bg-[#6e5538]",
     note: "text-[#5a5753]",
   },
@@ -42,6 +43,8 @@ export default function EmailForm({
   const id = useId();
   const [done, setDone] = useState(false);
   const t = tones[tone];
+  // Mockup D fades the success text in (styles in d.css); the key remounts it so the fade replays.
+  const swap = tone === "gt" && done ? "ef-swap" : undefined;
 
   return (
     <form
@@ -58,21 +61,36 @@ export default function EmailForm({
         <input
           id={id}
           type="email"
+          name="email"
+          autoComplete="email"
+          autoCapitalize="none"
+          spellCheck={false}
+          enterKeyHint="send"
           required
           disabled={done}
           placeholder="Your email"
-          className={`min-w-0 flex-1 bg-transparent py-2 text-[15px] outline-none ${t.input}`}
+          className={`min-w-0 flex-1 bg-transparent py-2 ${tone === "gt" ? "" : "text-[15px] "}outline-none ${t.input}`}
         />
         <button
           type="submit"
           disabled={done}
           className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${t.button}`}
         >
-          {done ? "You're in" : "Join the list"}
+          {/* Both labels share one grid cell, so the button keeps the wider width and the field doesn't jump. */}
+          <span className="grid">
+            <span className="invisible [grid-area:1/1]" aria-hidden>
+              Join the list
+            </span>
+            <span key={String(done)} className={`[grid-area:1/1] ${swap ?? ""}`}>
+              {done ? "You're in" : "Join the list"}
+            </span>
+          </span>
         </button>
       </div>
       <p aria-live="polite" className={compact ? "sr-only" : `mt-3 pl-5 text-sm ${t.note}`}>
-        {done ? "Thank you. We'll write when the first circles open." : "No spam. Just the news when circles open."}
+        <span key={String(done)} className={swap && `${swap} is--note`}>
+          {done ? "Thank you. We'll write when the first circles open." : "No spam. Just the news when circles open."}
+        </span>
       </p>
     </form>
   );

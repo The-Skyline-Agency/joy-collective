@@ -65,31 +65,12 @@ const features = [
 
 const LOADER_KEY = "jc:loader-seen";
 
-// Leaf helpers for the small sprout icon: each leaf base sits just off the stem.
-const LEAF_GAP = 8;
-const leafPath = (len: number, w: number) => `M0 0 C ${w} ${-len * 0.3}, ${w} ${-len * 0.75}, 0 ${-len} C ${-w} ${-len * 0.75}, ${-w} ${-len * 0.3}, 0 0 Z`;
-const leafAt = (x: number, y: number, rot: number, gap = LEAF_GAP) => {
-  const r = (rot * Math.PI) / 180;
-  return `translate(${(x + Math.sin(r) * gap).toFixed(2)} ${(y - Math.cos(r) * gap).toFixed(2)}) rotate(${rot})`;
-};
 // Logo artwork from Fernanda: the wordmark in the nav, the icon on its own above the sign-up.
 function Wordmark({ horizontal = false }: { horizontal?: boolean }) {
   return horizontal ? (
     <Image className="logo is--horizontal" src="/media/d/logo-joycollective.svg" alt="The Joy Collective" width={1433} height={217} priority />
   ) : (
     <Image className="logo is--stacked" src="/media/d/icon-joycollective.svg" alt="The Joy Collective" width={782} height={746} />
-  );
-}
-
-// Small sprout for icon spots (notifications, pop-up). Inherits the text color.
-function SunMark({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" aria-hidden className={className}>
-      <path transform={leafAt(26, 24, -55, 4)} d={leafPath(15, 5)} fill="currentColor" opacity=".7" />
-      <path transform={leafAt(27, 15, 58, 4)} d={leafPath(13, 4.5)} fill="currentColor" opacity=".5" />
-      <path transform={leafAt(27, 6, 4, 4)} d={leafPath(11, 4)} fill="currentColor" />
-      <path d="M24 44 C 24 34, 25 26, 27 18 C 28 13, 28 9, 27 5" fill="none" stroke="currentColor" strokeWidth="3.6" strokeLinecap="round" />
-    </svg>
   );
 }
 
@@ -159,7 +140,11 @@ export default function MockupD() {
   const lenisRef = useRef<Lenis | null>(null);
   const [modal, setModal] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const openModal = useCallback(() => setModal(true), []);
+  const lastFocus = useRef<HTMLElement | null>(null);
+  const openModal = useCallback(() => {
+    lastFocus.current = document.activeElement as HTMLElement | null;
+    setModal(true);
+  }, []);
 
   // Reduced motion: hold the hero video on its poster frame.
   useEffect(() => {
@@ -186,14 +171,22 @@ export default function MockupD() {
   useEffect(() => {
     if (!modal) return;
     lenisRef.current?.stop();
+    // Lenis is off on touch, so lock the page scroll directly too.
+    const html = document.documentElement;
+    const prevOverflow = html.style.overflow;
+    html.style.overflow = "hidden";
     // Wait a frame: the card is still visibility:hidden in the commit that opens it.
-    const f = requestAnimationFrame(() => cardRef.current?.querySelector("input")?.focus());
+    // On touch, focus the card instead so the keyboard doesn't jump up mid-transition.
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const f = requestAnimationFrame(() => (coarse ? cardRef.current : cardRef.current?.querySelector("input"))?.focus());
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setModal(false);
     window.addEventListener("keydown", onKey);
     return () => {
       cancelAnimationFrame(f);
       window.removeEventListener("keydown", onKey);
       lenisRef.current?.start();
+      html.style.overflow = prevOverflow;
+      lastFocus.current?.focus({ preventScroll: true });
     };
   }, [modal]);
 
@@ -246,6 +239,8 @@ export default function MockupD() {
             if (under.length) tl.to(under, { scale: by("scale", under.length), yPercent: by("yPercent", under.length), duration: 1, ease: "sine.inOut", overwrite: "auto" }, at);
             tl.to(c, { y: () => below(c), xPercent: xp[n % xp.length], rotate: rot[n % rot.length], duration: 0.8, ease: "power4.in", overwrite: "auto" }, at);
           });
+        // Let clicks through as soon as the page starts sliding up, not 1.5s later when it lands.
+        tl.set(".loader__screen", { pointerEvents: "none" }, "-=0.6");
         tl.to(".loader__bg", { rotate: 0.001, yPercent: 100, duration: 1.5, ease: "osmo" }, "-=0.6");
         tl.from(".hero", { rotate: 0.001, yPercent: -25, scale: 1.1, duration: 1.5, ease: "osmo" }, "<");
         const failsafe = window.setTimeout(() => loader.classList.add("is--skipped"), 6000);
@@ -312,7 +307,8 @@ export default function MockupD() {
           allowEventDefault: true,
           inertia: true,
           throwResistance: 2000,
-          dragResistance: 0.05,
+          dragResistance: 0, // 1:1 with the finger
+          minimumMovement: 10, // let the touch gate below decide scroll vs turn first
           maxDuration: 1,
           minDuration: 0.5,
           edgeResistance: 0.75,
@@ -354,7 +350,20 @@ export default function MockupD() {
         const base = p / 5; // one card every 5s
         let vel = 0;
         let lastY = window.scrollY;
+        // Only drift while the wheel is on screen, and ease to a stop while a mouse is over it.
+        let onScreen = false;
+        let hovering = false;
+        const io = new IntersectionObserver(([e]) => (onScreen = e.isIntersecting), { rootMargin: "200px 0px" });
+        io.observe(sl);
+        const hoverOn = (e: PointerEvent) => e.pointerType === "mouse" && (hovering = true);
+        const hoverOff = () => (hovering = false);
+        sl.addEventListener("pointerenter", hoverOn);
+        sl.addEventListener("pointerleave", hoverOff);
         const tick = (_t: number, dt: number) => {
+          if (!onScreen) {
+            lastY = window.scrollY;
+            return;
+          }
           // Cap: keeps real speed through stutters, but no jump after returning to a background tab.
           const sec = Math.min(dt, 250) / 1000;
           const y = window.scrollY;
@@ -362,7 +371,7 @@ export default function MockupD() {
           lastY = y;
           if (Math.abs(sv) > 0.5) dir = sv > 0 ? 1 : -1;
           const busy = drag.isPressed || !!drag.tween?.isActive() || gsap.isTweening(proxy);
-          const target = busy ? 0 : dir * base + gsap.utils.clamp(-60, 60, sv * 0.9);
+          const target = busy || hovering ? 0 : dir * base + gsap.utils.clamp(-60, 60, sv * 0.9);
           vel += (target - vel) * Math.min(1, sec * 4); // ease toward the target speed
           if (busy || Math.abs(vel) < 0.001) return;
           gsap.set(proxy, { rotation: rot() - vel * sec });
@@ -411,6 +420,9 @@ export default function MockupD() {
         update();
         return () => {
           gsap.ticker.remove(tick);
+          io.disconnect();
+          sl.removeEventListener("pointerenter", hoverOn);
+          sl.removeEventListener("pointerleave", hoverOff);
           sl.removeEventListener("wheel", onWheel);
           gate.abort();
           drag.kill();
@@ -432,11 +444,20 @@ export default function MockupD() {
         let busy = false;
         let progress: gsap.core.Tween | null = null;
         let timer: number | undefined;
+        let tl: gsap.core.Timeline | undefined;
+        // Autoplay holds while the section is off screen.
+        let onScreen = true;
+        const stepsIo = new IntersectionObserver(([e]) => {
+          onScreen = e.isIntersecting;
+          if (onScreen) progress?.resume();
+          else progress?.pause();
+        });
+        stepsIo.observe(q(".steps"));
         const runProgress = (i: number) => {
           progress?.kill();
           if (compact) {
             window.clearTimeout(timer);
-            timer = window.setTimeout(() => void (!busy && show((i + 1) % items.length)), ms - 900); // 3s per photo including the 0.9s reveal
+            timer = window.setTimeout(() => void (!busy && (onScreen ? show((i + 1) % items.length) : runProgress(i))), ms - 900); // 3s per photo including the 0.9s reveal
             return;
           }
           const bar = items[i].querySelector(".steps__progress");
@@ -444,7 +465,9 @@ export default function MockupD() {
           progress = gsap.to(bar, { scaleX: 1, duration: ms / 1000, ease: "power1.inOut", onComplete: () => !busy && show((i + 1) % items.length) });
         };
         const show = (i: number) => {
-          if (busy || items[i] === current) return;
+          // A click during a switch finishes the running one and retargets, instead of being dropped.
+          tl?.progress(1);
+          if (items[i] === current) return;
           busy = true;
           progress?.kill();
           window.clearTimeout(timer);
@@ -460,7 +483,7 @@ export default function MockupD() {
           const dur = noMotion ? 0 : 0.9;
           gsap.set(vis, { autoAlpha: 1, zIndex: 1 });
           if (prevV) gsap.set(prevV, { zIndex: 0 });
-          const tl = gsap.timeline({
+          tl = gsap.timeline({
             defaults: { duration: 0.65, ease: "power3" },
             onComplete: () => {
               current = item;
@@ -500,6 +523,8 @@ export default function MockupD() {
         ScrollTrigger.create({ trigger: ".steps", start: "top 90%", once: true, onEnter: () => show(0) });
         return () => {
           clicks.forEach((c) => c());
+          stepsIo.disconnect();
+          tl?.kill();
           progress?.kill();
           window.clearTimeout(timer);
         };
@@ -515,16 +540,14 @@ export default function MockupD() {
         });
       }
 
-      // ---------- Bento cards rise in one after another; the photo chip follows ----------
+      // ---------- Bento cards rise in one after another; each card carries its own contents ----------
       if (!noMotion) {
-        gsap.from(qa(".bento__card"), { y: 60, autoAlpha: 0, duration: 1, stagger: 0.12, ease: "power3.out", scrollTrigger: { trigger: ".gt .bento", start: "top 85%", once: true } });
-        gsap.from(qa(".bento__chip"), { y: 30, scale: 0.92, autoAlpha: 0, duration: 0.9, delay: 0.45, ease: "back.out(1.6)", scrollTrigger: { trigger: ".gt .bento", start: "top 85%", once: true } });
-        gsap.from(qa(".bento__face"), { x: -12, autoAlpha: 0, duration: 0.6, stagger: 0.06, delay: 0.5, ease: "power2.out", scrollTrigger: { trigger: ".gt .bento", start: "top 85%", once: true } });
+        gsap.from(qa(".bento__card"), { y: 32, autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: "power3.out", scrollTrigger: { trigger: ".gt .bento", start: "top 85%", once: true } });
       }
 
       // ---------- Founder note: lines rise in as you read; the portrait drifts slowly ----------
       if (!noMotion) {
-        qa("[data-letter-reveal]").forEach((n) => gsap.from(n, { y: 28, autoAlpha: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: n, start: "top 88%", once: true } }));
+        qa("[data-letter-reveal]").forEach((n) => gsap.from(n, { y: 12, autoAlpha: 0, duration: 0.6, ease: "power3.out", scrollTrigger: { trigger: n, start: "top 88%", once: true } }));
         // No drift on phones: the portrait sits flush to its top edge there (see d.css).
         if (!window.matchMedia("(max-width: 767px)").matches) gsap.fromTo(".gt .letter__photo img", { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: ".gt .letter", start: "top bottom", end: "bottom top", scrub: true } });
       }
@@ -635,11 +658,21 @@ export default function MockupD() {
           rotInner.style.width = widthOf(words[0]);
           call = gsap.delayedCall(2.5, roll);
         });
+        // Hold the word while the heading is off screen.
+        let rotOn = false;
+        const rotIo = new IntersectionObserver(([e]) => (rotOn = e.isIntersecting));
+        rotIo.observe(rotInner);
+        // Phones force the box to full width in CSS, so the width tween is wasted layout work there.
+        const narrow = window.matchMedia("(max-width: 767px)");
         const roll = () => {
+          if (!rotOn) {
+            call = gsap.delayedCall(2.5, roll);
+            return;
+          }
           const i = (r + 1) % words.length;
           const out = words[r];
           const inn = words[i];
-          gsap.to(rotInner, { width: widthOf(inn), duration: 0.75, ease: "power4.inOut" });
+          if (!narrow.matches) gsap.to(rotInner, { width: widthOf(inn), duration: 0.75, ease: "power4.inOut" });
           gsap.to(out, { yPercent: -150, duration: 0.6, ease: "power4.inOut", onComplete: () => void gsap.set(out, { autoAlpha: 0 }) });
           gsap.set(inn, { autoAlpha: 1 });
           gsap.fromTo(inn, { yPercent: 150 }, { yPercent: 0, duration: 0.75, ease: "power4.inOut" });
@@ -648,7 +681,7 @@ export default function MockupD() {
         };
 
         // Feature heading: lines rise out of a mask. Feature photos slide in, text follows.
-        SplitText.create(".features [data-split]", {
+        SplitText.create(".gt [data-split]", {
           type: "lines",
           mask: "lines",
           autoSplit: true,
@@ -690,7 +723,7 @@ export default function MockupD() {
 
         // Magnetic buttons: the button and its label follow the pointer, then spring back.
         const magnets: (() => void)[] = [];
-        mm.add("(min-width: 992px)", () => {
+        mm.add("(min-width: 992px) and (hover: hover) and (pointer: fine)", () => {
           qa("[data-magnetic-strength]").forEach((btn) => {
             const innerT = btn.querySelector<HTMLElement>("[data-magnetic-inner-target]");
             const s = parseFloat(btn.dataset.magneticStrength || "25");
@@ -703,12 +736,12 @@ export default function MockupD() {
               const rect = btn.getBoundingClientRect();
               const fx = (e.clientX - rect.left) / btn.offsetWidth - 0.5;
               const fy = (e.clientY - rect.top) / btn.offsetHeight - 0.5;
-              gsap.to(btn, { x: fx * (s / 16) + "em", y: fy * (s / 16) + "em", rotate: "0.001deg", ease: "power4.out", duration: 1.6 });
-              if (innerT) gsap.to(innerT, { x: fx * (si / 16) + "em", y: fy * (si / 16) + "em", rotate: "0.001deg", ease: "power4.out", duration: 2 });
+              gsap.to(btn, { x: fx * (s / 16) + "em", y: fy * (s / 16) + "em", rotate: "0.001deg", ease: "power4.out", duration: 1.6, overwrite: "auto" });
+              if (innerT) gsap.to(innerT, { x: fx * (si / 16) + "em", y: fy * (si / 16) + "em", rotate: "0.001deg", ease: "power4.out", duration: 2, overwrite: "auto" });
             };
             const leave = () => {
-              gsap.to(btn, { x: "0em", y: "0em", ease: "elastic.out(1, 0.3)", duration: 1.6, clearProps: "all" });
-              if (innerT) gsap.to(innerT, { x: "0em", y: "0em", ease: "elastic.out(1, 0.3)", duration: 2, clearProps: "all" });
+              gsap.to(btn, { x: "0em", y: "0em", ease: "elastic.out(1, 0.6)", duration: 0.8, clearProps: "all" });
+              if (innerT) gsap.to(innerT, { x: "0em", y: "0em", ease: "elastic.out(1, 0.6)", duration: 1, clearProps: "all" });
             };
             btn.addEventListener("mouseenter", enter);
             btn.addEventListener("mousemove", move);
@@ -724,6 +757,7 @@ export default function MockupD() {
 
         return () => {
           live = false;
+          rotIo.disconnect();
           call?.kill();
           window.removeEventListener("mousemove", onMove);
           window.removeEventListener("scroll", onCursorScroll);
@@ -826,7 +860,7 @@ export default function MockupD() {
         <div className="pb-5" />
       </div>
 
-      <nav className="nav" aria-label="Main">
+      <nav className="nav" aria-label="Main" inert={modal || undefined}>
         <div className="nav__inner">
           <a href="#top" className="nav__logo" aria-label="The Joy Collective, back to top">
             <Wordmark horizontal />
@@ -843,7 +877,7 @@ export default function MockupD() {
         </div>
       </nav>
 
-      <main>
+      <main inert={modal || undefined}>
         <section className="hero" id="top">
           <div className="hero__media">
             {/* 8s seamless loop cut from four clips, graded to one look (see public/media/d/SOURCES.md) */}
@@ -1003,7 +1037,7 @@ export default function MockupD() {
               <div className="social__vignette" aria-hidden />
               <div className="social__scrim" aria-hidden />
               <div className="social__content">
-                <div className="social__text on-dark">
+                <div className="social__text on-dark" data-letter-reveal>
                   <h2 className="social__heading">You don&rsquo;t have to carry it alone</h2>
                   <p className="social__body">
                     A small circle where you can take off the armor, let your guard down and show up as you are. No likes, no follower counts, no advice you didn&rsquo;t ask for.
@@ -1013,7 +1047,7 @@ export default function MockupD() {
                   {notifs.map((m, i) => (
                     <div key={m} className="notif" style={i === 3 ? { opacity: 0 } : undefined}>
                       <span className="notif__icon">
-                        <SunMark />
+                        <Image src="/media/d/icon-joycollective.svg" alt="" width={782} height={746} />
                       </span>
                       <span className="notif__title">The Joy Collective</span>
                       <span className="notif__time">now</span>
@@ -1116,7 +1150,7 @@ export default function MockupD() {
         </div>
       </main>
 
-      <div className="closing" id="bottom">
+      <div className="closing" id="bottom" inert={modal || undefined}>
         <div className="closing__washes" aria-hidden>
           <div className="closing__wash is--1" />
           <div className="closing__wash is--2" />
